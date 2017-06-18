@@ -1,0 +1,266 @@
+/*** Nav bar styles ***/
+
+ul#menu, #menu ul
+{
+  /*Remove all spacings from the list items*/
+  margin: 0;
+  padding: 0;
+  cursor: default;
+  list-style-type: none;
+}
+
+ul#menu
+{
+  width: 30ex;
+  /*Optional, to make the navigation bar positions on the left of the content*/
+  float: left;
+  margin-right: 1em;
+}
+
+ul#menu>li
+{
+  margin: 0;
+  padding: 2px 6px;
+}
+
+ul#menu,div#menu li>ul
+{
+  /*Make the sub list items indented*/
+  display : block;
+  padding-left: 6px;
+}
+
+#menu ul li a
+{
+  /*Make the hyperlinks as a block element, sort of a hover effect*/
+  display: block;
+  voice-family: "\"}\""; 
+  voice-family: inherit;
+  padding: 2px 10px;
+}
+
+/*** Menu styles (customizable) ***/
+
+ul#menu, #menu ul, #menu ul li a
+{
+  border: 1px solid #369;
+  background-color: #fff;
+  color: #369;
+}
+
+#menu ul li ul a
+{
+  border: none;
+  font-size: 90%;
+}
+
+ul#menu li:hover, #menu ul li a:hover
+{
+  background-color: #369;
+  color: #fff;
+}
+
+ul#menu li:active, #menu ul li a:active
+{
+  background-color: #036;
+  color: #fff;
+}
+
+#menu a
+{
+  text-decoration: none;
+}
+
+/* **************************************************************** */
+
+#menu 
+{
+  display: block;
+  margin: 0 2em;
+  position:fixed;
+  top:20px;
+  left:20px;
+  font:14px helvetica, verdana, arial, sans-serif; 
+  padding:10px;
+  background-color:#eee;
+  line-height:17px;
+  voice-family: "\"}\"";
+  voice-family:inherit;
+  width:200px;
+  border: 1px solid #999;
+  -moz-border-radius:1em; 
+} 
+
+body 
+{
+  display: block;
+  color:#333;
+  background-color: #eee;
+  margin-left: 290px;
+  margin-right: 65px;
+  padding:20px;
+  border: 2px solid #999;
+  -moz-border-radius:1em; 
+  font:14px helvetica, verdana, arial, sans-serif;
+  text-align: justify;
+}
+
+#old-news, #releases, #changelog, #documentation, #back 
+{ 
+  display: none;
+}
+
+h1.title 
+{
+  display: none;
+}
+
+h1 
+{
+  font-size: 18px;
+  border-bottom: 1px solid;
+}
+
+h2 
+{
+  font: 14px verdana, arial, helvetica, sans-serif;
+  border-bottom: 1px dashed;
+  margin:0px 0px 5px 0px;
+  padding:0px;
+}
+
+p 
+{
+  font:13px helvetica, verdana, arial, sans-serif;
+  margin:0px 0px 16px 0px;
+  padding:0px;
+}
+
+a 
+{
+  color:#369;
+  font-family:verdana, arial, helvetica, sans-serif;
+  font-weight:600;
+  text-decoration:none;
+}
+
+a:link 
+{
+  color: #369;
+}
+
+a:visited 
+{
+  color: DarkBlue;
+}
+
+a:hover 
+{
+  text-decoration: underline;
+}
+
+table.footnote 
+{
+  font: 10px Lucida;
+}
+
+/* docutils error messages */ 
+div.system-message 
+{
+  border: 1px solid red;
+  margin: 5px;
+  padding: 5px;
+}
+
+
+/* Again, "be nice to Opera 5". */
+body>menu 
+{
+  width:150px;
+}
+
+tt 
+{
+  color: #000066; 
+}
+
+span.pre 
+{
+  white-space: pre; 
+}
+
+pre.address 
+{
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100%; 
+}
+
+pre.line-block 
+{
+  font-family: serif ;
+  font-size: 100%; 
+}
+
+pre.literal-block, pre.doctest-block 
+{
+  margin-left: 2em ;
+  margin-right: 2em ;
+  background-color: #ffffff;
+  border: 1px black solid;
+  padding: 5px;
+}
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title 
+{
+  color: blue ;
+  font-weight: bold ;
+  font-family: sans-serif;
+  text-align: center;
+  background-color: #9197e2;
+  display: block;
+  margin: 0; 
+}
+
+
+div.hint 
+{ 
+  display: none; 
+}
+
+div.attention, div.caution, div.danger, div.error
+div.important, div.note, div.tip, div.warning 
+{
+  background-color: #9197e2;
+  align: center;
+  width: 40%;
+  border: medium outset ;
+  padding: 3px;
+  float: right;
+  moz-border-radius:0.5em; 
+ }
+
+
+/* Highlighting: */
+
+.function {color: #000077; font-weight: bold;}
+.keyword {color: #004444;}
+.comment {color: #770000; font-style: italic;}
+.normal {color: #000000;}
+.string {color: #006600;}
+.symbol {color: #000000;}
+
+.htmltag {color: #000077;}
+.htmlsymbol {color: #000000;}
+.htmlnormal {color: #000000;}
+.htmlcomment {color: #770000; font-style: italic;}
+.htmlstring {color: #006600;}
+.htmlattr {color: #000000;}
+
+.stmlfunction {color: #000077; font-weight: bold;}
+.stmlattr {color: #000000;}
+.stmlstring {color: #006600;}
+.stmlexpr {color: #004444;}

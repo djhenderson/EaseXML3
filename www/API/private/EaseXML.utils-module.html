@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>EaseXML.utils</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="EaseXML-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="EaseXML-module.html">Package&nbsp;EaseXML</a> ::
+        Module&nbsp;utils
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[show&nbsp;private&nbsp;|&nbsp;<a href="../public/EaseXML.utils-module.html">hide&nbsp;private</a>]</font></td></tr>
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="EaseXML.utils-module.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF MODULE DESCRIPTION =========== -->
+<h2 class="module">Module EaseXML.utils</h2>
+
+
+<!-- =========== START OF FUNCTION SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Function Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.utils-module.html#contains" class="summary-sig-name"><code>contains</code></a>(<span class=summary-sig-arg>list1</span>,
+          <span class=summary-sig-arg>list2</span>)</span></code>
+<br />
+Check if some elements of list1 appear in list2</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="customUnicode"></a><span class="summary-sig"><span class="summary-sig-name">customUnicode</span>(<span class=summary-sig-arg>data</span>,
+          <span class=summary-sig-arg>encoding</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.utils-module.html#getDirectChildrenWithName" class="summary-sig-name"><code>getDirectChildrenWithName</code></a>(<span class=summary-sig-arg>parent</span>,
+          <span class=summary-sig-arg>name</span>)</span></code>
+<br />
+Fetch <em>direct</em> sub-nodes of a <a href="EaseXML.utils-module.html#getDirectChildrenWithName" class="link"><code>parent</code></a> DOM tree.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.utils-module.html#lowWord" class="summary-sig-name"><code>lowWord</code></a>(<span class=summary-sig-arg>word</span>)</span></code>
+<br />
+FoObar -&gt; foObar</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.utils-module.html#replaceAll" class="summary-sig-name"><code>replaceAll</code></a>(<span class=summary-sig-arg>initialString</span>,
+          <span class=summary-sig-arg>translationHash</span>)</span></code>
+<br />
+for each (toReplace, replacement) in <a href="EaseXML.utils-module.html#replaceAll" class="link"><code>translationHash</code></a>
+applying the query-replace operation to <a href="EaseXML.utils-module.html#replaceAll" class="link"><code>initialString</code></a></td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.utils-module.html#titleWord" class="summary-sig-name"><code>titleWord</code></a>(<span class=summary-sig-arg>word</span>)</span></code>
+<br />
+foObar -&gt; FoObar</td></tr>
+</table><br />
+
+
+<!-- =========== START OF FUNCTION DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Function Details</th></tr>
+</table>
+
+<a name="contains"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">contains</span>(<span class=sig-arg>list1</span>,
+          <span class=sig-arg>list2</span>)</span>
+  </h3>
+<p>Check if some elements of list1 appear in list2</p>
+<p>Return the intersection of the two lists</p>
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getDirectChildrenWithName"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getDirectChildrenWithName</span>(<span class=sig-arg>parent</span>,
+          <span class=sig-arg>name</span>)</span>
+  </h3>
+<p>Fetch <em>direct</em> sub-nodes of a <a href="EaseXML.utils-module.html#getDirectChildrenWithName" class="link"><code>parent</code></a> DOM tree. These
+nodes must have a name matching <a href="EaseXML.utils-module.html#getDirectChildrenWithName" class="link"><code>name</code></a>.</p>
+<p>Return a list of DOM Nodes.</p>
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="lowWord"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">lowWord</span>(<span class=sig-arg>word</span>)</span>
+  </h3>
+FoObar -&gt; foObar  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="replaceAll"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">replaceAll</span>(<span class=sig-arg>initialString</span>,
+          <span class=sig-arg>translationHash</span>)</span>
+  </h3>
+for each (toReplace, replacement) in <a href="EaseXML.utils-module.html#replaceAll" class="link"><code>translationHash</code></a>
+applying the query-replace operation to <a href="EaseXML.utils-module.html#replaceAll" class="link"><code>initialString</code></a>  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="titleWord"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">titleWord</span>(<span class=sig-arg>word</span>)</span>
+  </h3>
+foObar -&gt; FoObar  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="EaseXML-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Sun Dec 12 17:20:24 2004</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

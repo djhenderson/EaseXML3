@@ -1,0 +1,16 @@
+
+- sort of DTD and/or Schema support ?
+- namespace handling
+- Bridge between SQLObject and EaseXML
+
+Done
+====
+
+- unit-tests
+- add list assignment (e.g, playlist.songs = [ ... ])
+- make `fromXml` a classmethod
+- entities
+- make sure user-XMLObjects don't inherit XMLObject methods and constructor.
+- CommentNode
+- huh ... unicode support ...
+- ProcessingInstructionNode

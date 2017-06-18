@@ -1,0 +1,40 @@
+
+
+Binary EaseXML packages
+=======================
+
+- CSW Project (for Solaris systems):
+
+  * http://www.blastwave.org/packages.php/py_xmlobject
+
+
+
+Requirements
+============
+
+- Python >= 2.2
+- PyXML (included in Python2.3)
+
+One-Step-Installation
+=====================
+
+As usual:
+
+::
+
+  # python setup.py install
+
+
+There's a little EaseXML-HowTo in docs/README. The HTML version of
+this 'howto' sits in www/ directory. Some simple examples of how to
+use EaseXML are stored in examples/ directory.
+
+Feedback
+========
+
+Flames should go to phil@respyre.org
+There exists a mailing-list where people can discuss about
+EaseXML. Send a mail to xmlobject-subsribe@lists.base-art.net to
+subscribe. Archives are located at
+http://lists.base-art.net/xmlobject-discuss/
+

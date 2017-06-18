@@ -1,0 +1,81 @@
+- Version 0.2.0 -- 12/12/2004
+
+  * Project's name changed from XMLObject to EaseXML !
+  * Better support for XMLObjects comparison, inheritance and introspection
+  * New Node type : ProcessingInstructionNode
+  * New boolean class attribute : _stripStrings, True by
+    default. Indicates wether strings should be stripped (removing
+    extra spaces, tabs, carrier returns) when passing throught
+    XMLObject or not
+  * Unicode typed strings output can now be disabled (_unicodeOutput boolean
+    class attribute defaults to True)
+  * Nodes output can now be ordered by node names (_nodesOrder and _attrsOrder 
+    lists as class attributes)
+  * Pretty XML printing can be disabled (usefull when dealing with
+    large data) by setting the class attribute _prettyPrint to False
+  * "mainNode" naming convention replaced by a boolean keyword
+    parameter for Node constructor.
+  * new XMLObject.forEach() method, usefull to apply an action on all
+    nodes handled by a given XMLObject instance.
+  * New Python dictionaries XMLObject import/export API : fromDict() / toDict()
+  * Many bugfixes since 0.1.3 (zero-value IntegerAttribute, None-value
+    support in Nodes, XML comments pretty printing, ..)
+  * Documentation re-write
+
+- Version 0.1.3 -- 06/10/2004
+
+  * Unicode support
+  * Corrected few regex related bugs in the PrettyXMLPrinter
+  * New XMLObject.instanceFromXml() function (from Jacob Fan) usefull
+    to build an XMLObject without knowing its class
+  * Some code refactoring
+  * Documentation update and API generated using epydoc
+  * Now releases are available directly in SVN (tags/ directory).
+
+- Version 0.1.2 -- 23/08/2004
+
+  * Corrected a bug in TypedList and MixedList preventing from adding
+    one item in itself.
+
+- Version 0.1.1 -- 05/08/2004
+
+  * Added a little wrap around dom.getElementsByTagName() to search
+    nodes in direct children instead of all the XML document (Thanks to
+    Jacob Fan for the patch).
+  * Added a dash in some regexes of PrettyXMLPrinter and thus allowing
+    tag names to contain the dash character (Thanks to Richard
+    Prescott for reporting the problem)
+  * New type Node added : CommentNode
+
+- Version 0.1.0 -- 31/07/2004
+
+  * Special class attribute `_name` to override default object name
+    when translating to XML.
+  * Method definition support (Thanks to Anders Pearson for patch).
+  * entities support through special class attribute `entities` (see 
+    the doc for more details).
+  * `facultative` Node keyword renamed to `optional` (Thanks to Jesir
+    Vargas for advice).
+  * `noLimit` ChoiceNode keyword added. Use it if you want multiple instances
+    of a Node in the same ChoiceNode.
+  * Re-worked XML beautiful-output in a new module (PrettyXMLPrinter).
+  * One-node-XMLObjects support using special attribute name 'mainNode'
+  * New Attributes : CDATAttribute, NMTokenAttribute,
+    NMTokensAttribute (like in DTDs)
+  * Few more unit-tests (working this time :-) )
+  
+- Version 0.0.3 -- 16/06/2004
+
+  * `fromXml` is now a class method
+  * Added list assignements (XMLObject.ListNode = [ ... ])
+  * `TextNode` mis-behavior fixed (Thanks to Joshua H. Rothenberg for bug report)
+
+- Version 0.0.2 -- 03/06/2004
+  
+  * Comparing (__cmp__) XMLObjects
+  * Introspection (contributed by Simon Dumbleton)
+  * Starting `real` unit-tests (PyUnit powered)
+
+- Version 0.0.1 -- 24/05/2004
+
+  * Initial Release

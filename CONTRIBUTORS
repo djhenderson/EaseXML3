@@ -1,0 +1,26 @@
+I thank these people for their contributions on XMLObject:
+
+- Simon Dumbleton <simondumbleton@hotmail.com> 
+  * XMLObject's introspection patch
+
+- Anders Pearson <anders@columbia.edu>
+  * Method definition support patch
+
+- People at Nordicbet / Exoweb:
+  * Tobias Brox <tobias@nordicbet.com>
+  * Ken Wong <ken@exoweb.net>
+  * Jacob Fan <jacob@exoweb.net>
+  * Adam Lowry <adam@exoweb.net>
+
+  - dom.getElementsByTagName() 'wrapper' to limit elements search to
+    direct DOM children.
+  - many bugfixes and improvements
+
+- Richard Prescott <rip@step.polymtl.ca>
+  * dash in tag names request feature
+
+- Ray, TD Travis <Travis.D.Ray@L-3com.com>
+  * {ListNode,ChoiceNode} recursion bug report
+
+- Voidspace <mike@pcblokes.com>
+  * Second {ListNode,ChoiceNode} recursion bug report ;)

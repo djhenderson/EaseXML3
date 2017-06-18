@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<!--
+  Converted from a DTD by dtd2schema.py, using xmlproc.
+  NOTE: This version is not reliable. It has not been
+  properly checked against the standard (20000407 WD) yet.
+-->
+
+<schema xmlns="http://www.w3.org/1999/XMLSchema">
+
+<!-- ========= ATTRIBUTE GROUP DECLARATIONS ========= -->
+
+  <attributeGroup name="group1">
+      <attribute name="id" type="ID" use="optional"/>
+      <attribute name="added" type="CDATA" use="optional"/>
+  </attributeGroup>
+
+<!-- ========== ELEMENT DECLARATIONS ========== -->
+
+  <element name="info">
+    <complexType>
+    <group>
+      <sequence>
+        <element ref="metadata" minOccurs="1" maxOccurs="*"/>
+      </sequence>
+    </group>
+    </complexType>
+  </element>
+
+  <element name="title">
+    <simpleType ref="string"/>
+  </element>
+
+  <element name="bookmark">
+    <complexType>
+      <group>
+        <sequence>
+          <element ref="title" minOccurs="0" maxOccurs="1"/>
+          <element ref="info" minOccurs="0" maxOccurs="1"/>
+          <element ref="desc" minOccurs="0" maxOccurs="1"/>
+        </sequence>
+      </group>
+      <attribute name="href" type="CDATA" use="required"/>
+      <attribute name="visited" type="CDATA" use="optional"/>
+      <attribute name="modified" type="CDATA" use="optional"/>
+      <attributeGroup ref="group1"/>
+    </complexType>
+  </element>
+
+  <element name="alias">
+    <complexType content="empty">
+      <attribute name="ref" type="IDREF" use="required"/>
+    </complexType>
+  </element>
+
+  <element name="separator">
+    <complexType content="empty">
+    </complexType>
+  </element>
+
+  <element name="xbel">
+    <complexType>
+      <group>
+         <sequence>
+            <element ref="title" minOccurs="0" maxOccurs="1"/>
+	    <element ref="info" minOccurs="0" maxOccurs="1"/>
+	    <element ref="desc" minOccurs="0" maxOccurs="1"/>
+            <group>
+              <choice>
+                <element ref="bookmark"/>
+                <element ref="folder"/>
+		<element ref="alias"/>
+		<element ref="separator"/>
+              </choice>
+            </group>
+          </sequence>
+      </group>
+      <attribute name="version" type="CDATA" use="fixed" value="1.0"/>
+      <attributeGroup ref="group1"/>
+    </complexType>
+  </element>
+
+  <element name="folder">
+    <complexType>
+      <group>
+        <sequence>
+          <element ref="title" minOccurs="0" maxOccurs="1"/>
+          <element ref="info" minOccurs="0" maxOccurs="1"/>
+          <element ref="desc" minOccurs="0" maxOccurs="1"/>
+          <group>
+             <choice>
+	       <element ref="bookmark"/>
+	       <element ref="folder"/>
+	       <element ref="alias"/>
+	       <element ref="separator"/>
+             </choice>
+	  </group>
+        </sequence>
+      </group>
+      <attribute name="folded" use="default" value="yes">
+        <simpleType base="NMTOKEN">
+          <enumeration value="yes"/>
+          <enumeration value="no"/>
+        </simpleType>
+      </attribute>
+      <attributeGroup ref="group1"/>
+    </complexType>
+  </element>
+
+  <element name="desc">
+    <simpleType ref="string"/>
+  </element>
+
+  <element name="metadata">
+    <complexType content="empty">
+      <attribute name="owner" type="CDATA" use="required"/>
+    </complexType>
+  </element>
+
+</schema>

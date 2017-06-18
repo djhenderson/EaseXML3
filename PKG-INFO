@@ -1,0 +1,25 @@
+Metadata-Version: 1.0
+Name: EaseXML
+Version: 0.2.0
+Summary: An XML wrapper to Python Objects
+Home-page: http://easexml.base-art.net
+Author: Philippe Normand
+Author-email: phil@respyre.org
+License: PSF
+Download-URL: http://easexml.base-art.net/download/
+Description: EaseXML is an object-xml mapper. It allows to translate XML to Python
+        objects and vice-versa. Your developer life is made easier :
+        
+        - design some classes with special attributes
+        - manipulate the objects in the Python way
+        - input/output from/to XML data
+        - input/output from/to Python dictionaries
+        
+Keywords: xml,easy,data-binding,mapping,dtd,schema
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Python Software Foundation License
+Classifier: Programming Language :: Python
+Classifier: Topic :: Text Processing :: Markup :: XML
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

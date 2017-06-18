@@ -1,0 +1,855 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>EaseXML.main.XMLObject</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="EaseXML-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="EaseXML-module.html">Package&nbsp;EaseXML</a> ::
+        <a href="EaseXML.main-module.html">Module&nbsp;main</a> ::
+        Class&nbsp;XMLObject
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[show&nbsp;private&nbsp;|&nbsp;<a href="../public/EaseXML.main.XMLObject-class.html">hide&nbsp;private</a>]</font></td></tr>
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="EaseXML.main.XMLObject-class.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF CLASS DESCRIPTION =========== -->
+<h2 class="class">Type XMLObject</h2>
+
+<pre class="base-tree">
+<a href="__builtin__.object-class.html"><code>object</code></a> --+
+         |
+        <b>XMLObject</b>
+</pre><br />
+
+<dl><dt><b>Known Subclasses:</b></dt>
+<dd>
+    <a href="EaseXML.Validation.Schema.Attribute-class.html"><code>Attribute</code></a>,
+    <a href="EaseXML.Validation.Schema.AttributeGroup-class.html"><code>AttributeGroup</code></a>,
+    <a href="EaseXML.Validation.Schema.Choice-class.html"><code>Choice</code></a>,
+    <a href="EaseXML.Validation.Schema.ComplexType-class.html"><code>ComplexType</code></a>,
+    <a href="EaseXML.Validation.Schema.Element-class.html"><code>Element</code></a>,
+    <a href="EaseXML.Validation.Schema.Enumeration-class.html"><code>Enumeration</code></a>,
+    <a href="EaseXML.Validation.Schema.Group-class.html"><code>Group</code></a>,
+    <a href="EaseXML.Validation.Schema.Schema-class.html"><code>Schema</code></a>,
+    <a href="EaseXML.Validation.Schema.Sequence-class.html"><code>Sequence</code></a>,
+    <a href="EaseXML.Validation.Schema.SimpleType-class.html"><code>SimpleType</code></a></dd></dl>
+
+<hr/>
+
+<p>Class attributes of interest:</p>
+<ul class="rst-simple">
+<li><tt class="literal"><span class="pre">_name</span></tt> : overrides <a href="EaseXML.main.XMLObject-class.html#__name__" class="link"><code>__name__</code></a></li>
+<li><tt class="literal"><span class="pre">_entities</span></tt> : user-defined entities stored in a tuples-list,</li>
+<li><tt class="literal"><span class="pre">_stripStrings</span></tt> : does xml import should strip strings ? (remove tabs,
+extra spaces)</li>
+<li><tt class="literal"><span class="pre">_prettyPrint</span></tt> : should XML output be pretty printed ?</li>
+<li>Nodes ordering:<ul>
+<li><tt class="literal"><span class="pre">_nodesOrder</span></tt> : a list of Node (TextNode, ListNode, RawNode, CommentNode, ...) names</li>
+<li><tt class="literal"><span class="pre">_attrsOrder</span></tt> : a list of Attributes (StringAttribute, IntegerAttribute, ...) names</li>
+</ul>
+</li>
+<li><tt class="literal"><span class="pre">_encoding</span></tt> : document encoding (default: 'utf-8')</li>
+</ul>
+<p>If you pass the keyword <tt class="literal"><span class="pre">main=True</span></tt> to one of your Nodes, it will be hooked so that
+calling Node methods ('append' for instance) from the XMLObject instance will
+be applied to that main Node:</p>
+<pre class="literal-block">
+class Other(XMLObject):
+    boo = StringAttribute(default='titi')
+
+class Single(XMLObject):
+    content = ChoiceNode(['Other','Single'], noLimit=True, main=True)
+    title = StringAttribute()
+
+single = Single()
+single.title = 'Foo'
+single.append(Other())
+single.append(Other())
+single.append(single)
+
+&lt;Single title=&quot;Foo&quot;&gt;
+  &lt;Other boo=&quot;titi&quot;/&gt;
+  &lt;Other boo=&quot;titi&quot;/&gt;
+  &lt;Single title=&quot;Foo&quot;&gt;
+    &lt;Other boo=&quot;titi&quot;/&gt;
+    &lt;Other boo=&quot;titi&quot;/&gt;
+  &lt;/Single&gt;
+&lt;/Single&gt;
+</pre>
+<hr/>
+
+
+<!-- =========== START OF METHOD SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Method Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="__init__"></a><span class="summary-sig"><span class="summary-sig-name">__init__</span>(<span class=summary-sig-arg>self</span>,
+          <span class="summary-sig-vararg">*args</span>,
+          <span class="summary-sig-kwarg">**kw</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.main.XMLObject-class.html#__cmp__" class="summary-sig-name"><code>__cmp__</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>other</span>)</span></code>
+<br />
+Two XMLObjects are equal if they have the same XML representation</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="__eq__"></a><span class="summary-sig"><span class="summary-sig-name">__eq__</span>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>other</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="__getattr__"></a><span class="summary-sig"><span class="summary-sig-name">__getattr__</span>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>attrName</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="__getattr__"></a><span class="summary-sig"><span class="summary-sig-name">__getitem__</span>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>attrName</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="__ne__"></a><span class="summary-sig"><span class="summary-sig-name">__ne__</span>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>other</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="__str__"></a><span class="summary-sig"><span class="summary-sig-name">__str__</span>(<span class=summary-sig-arg>self</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.main.XMLObject-class.html#forEach" class="summary-sig-name"><code>forEach</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>callableFunc</span>,
+          <span class="summary-sig-vararg">*args</span>,
+          <span class="summary-sig-kwarg">**kw</span>)</span></code>
+<br />
+Execute an action for <em>each</em> Node handled by an XMLObject.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.main.XMLObject-class.html#fromDict" class="summary-sig-name"><code>fromDict</code></a>(<span class=summary-sig-arg>cls</span>,
+          <span class=summary-sig-arg>aDict</span>)</span></code>
+<br />
+Build an XMLObject given its dict representation.    <i>(Class method)</i>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.main.XMLObject-class.html#fromXml" class="summary-sig-name"><code>fromXml</code></a>(<span class=summary-sig-arg>cls</span>,
+          <span class=summary-sig-arg>xmlData</span>)</span></code>
+<br />
+Feeding an XMLObject instance with XML string data.    <i>(Class method)</i>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.main.XMLObject-class.html#get" class="summary-sig-name"><code>get</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>nodeName</span>)</span></code>
+<br />
+Fetch a node value given its name.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.main.XMLObject-class.html#getChildren" class="summary-sig-name"><code>getChildren</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Basic Introspection</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="getClassName"></a><span class="summary-sig"><span class="summary-sig-name">getClassName</span>(<span class=summary-sig-arg>cls</span>)</span></code>
+<br />
+    <i>(Class method)</i>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.main.XMLObject-class.html#getEntities" class="summary-sig-name"><code>getEntities</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Get all entities specified in the xmlobject:</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.main.XMLObject-class.html#getName" class="summary-sig-name"><code>getName</code></a>(<span class=summary-sig-arg>cls</span>)</span></code>
+<br />
+Fetch XMLObject's instance name
+which can be redefined by <tt class="literal"><span class="pre">_name</span></tt> class attribute.    <i>(Class method)</i>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.main.XMLObject-class.html#getNodes" class="summary-sig-name"><code>getNodes</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Sub-Nodes accessor</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.main.XMLObject-class.html#getNodeWithName" class="summary-sig-name"><code>getNodeWithName</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>nodeName</span>)</span></code>
+<br />
+Specific-Node accessor</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.main.XMLObject-class.html#getParentNode" class="summary-sig-name"><code>getParentNode</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Accessing the parent Node instance.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="orderAttrs"></a><span class="summary-sig"><span class="summary-sig-name">orderAttrs</span>(<span class=summary-sig-arg>self</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.main.XMLObject-class.html#orderNodes" class="summary-sig-name"><code>orderNodes</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>nodesList</span>)</span></code>
+<br />
+XMLObject remembers its children by a hash storage.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.main.XMLObject-class.html#set" class="summary-sig-name"><code>set</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>nodeName</span>,
+          <span class=summary-sig-arg>val</span>)</span></code>
+<br />
+Modify a node value given its name.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="setName"></a><span class="summary-sig"><span class="summary-sig-name">setName</span>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>newName</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.main.XMLObject-class.html#setParentNode" class="summary-sig-name"><code>setParentNode</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>node</span>)</span></code>
+<br />
+Setting the parent Node instance.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.main.XMLObject-class.html#toDict" class="summary-sig-name"><code>toDict</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Fetch an XMLObject instance's data in a hash mapped by Node name</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="EaseXML.main.XMLObject-class.html#toXml" class="summary-sig-name"><code>toXml</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>headers</span>,
+          <span class=summary-sig-arg>tabLength</span>,
+          <span class=summary-sig-arg>prettyPrint</span>)</span></code>
+<br />
+Exporting an XMLObject instance to XML.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="../private/EaseXML.main.XMLObject-class.html#_fromDom" class="summary-sig-name"><code>_fromDom</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>dom</span>)</span></code>
+<br />
+Building an XMLObject given its pendant DOM tree.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="../private/EaseXML.main.XMLObject-class.html#_init" class="summary-sig-name"><code>_init</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Method executed after instance initialization (__init__).</td></tr>
+<tr bgcolor="#e8f0f8" class="group">
+  <th colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;Inherited from object</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="__builtin__.object-class.html#__delattr__" class="summary-sig-name"><code>__delattr__</code></a>(<span class="summary-sig-vararg">...</span>)</span></code>
+<br />
+x.__delattr__('name') &lt;==&gt; del x.name</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="__builtin__.object-class.html#__getattribute__" class="summary-sig-name"><code>__getattribute__</code></a>(<span class="summary-sig-vararg">...</span>)</span></code>
+<br />
+x.__getattribute__('name') &lt;==&gt; x.name</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="__builtin__.object-class.html#__hash__" class="summary-sig-name"><code>__hash__</code></a>(<span class=summary-sig-arg>x</span>)</span></code>
+<br />
+x.__hash__() &lt;==&gt; hash(x)</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="__builtin__.object-class.html#__new__" class="summary-sig-name"><code>__new__</code></a>(<span class=summary-sig-arg>T</span>,
+          <span class=summary-sig-arg>S</span>,
+          <span class="summary-sig-vararg">...</span>)</span></code>
+<br />
+T.__new__(S, ...) -&gt; a new object with type S, a subtype of T</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="__builtin__.object-class.html#__reduce__" class="summary-sig-name"><code>__reduce__</code></a>(<span class="summary-sig-vararg">...</span>)</span></code>
+<br />
+helper for pickle</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="__builtin__.object-class.html#__reduce_ex__" class="summary-sig-name"><code>__reduce_ex__</code></a>(<span class="summary-sig-vararg">...</span>)</span></code>
+<br />
+helper for pickle</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="__builtin__.object-class.html#__repr__" class="summary-sig-name"><code>__repr__</code></a>(<span class=summary-sig-arg>x</span>)</span></code>
+<br />
+x.__repr__() &lt;==&gt; repr(x)</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="__builtin__.object-class.html#__setattr__" class="summary-sig-name"><code>__setattr__</code></a>(<span class="summary-sig-vararg">...</span>)</span></code>
+<br />
+x.__setattr__('name', value) &lt;==&gt; x.name = value</td></tr>
+</table><br />
+
+
+<!-- =========== START OF CLASS VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Class Variable Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>str</code></font></td>
+<td><b><a href="EaseXML.main.XMLObject-class.html#__name__"><code>__name__</code></a></b> = <span title="'XMLObject'"><code><span class="variable-quote">'</span>XMLObject<span class="variable-quote">'</span>                                   </code>
+</span></td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>dict</code></font></td>
+<td><b><a href="EaseXML.main.XMLObject-class.html#__nodes__"><code>__nodes__</code></a></b> = <span title="{'xmlProcessingInstruction': &lt;EaseXML.Node.ProcessingInstructionNode object at 0xb7db308c&gt;}"><code>{'xmlProcessingInstruction':&nbsp;&lt;EaseXML.Node.P<span class="variable-ellipsis">...</span></code>
+</span></td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>dict</code></font></td>
+<td><b><a href="EaseXML.main.XMLObject-class.html#__ns_nodes__"><code>__ns_nodes__</code></a></b> = <span title="{}"><code>{}                                        </code>
+</span></td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>type</code></font></td>
+  <td><a name="__metaclass__"></a><b><code>__metaclass__</code></b> = <a href="../private/EaseXML.main.MetaXMLObject-class.html"><code>EaseXML.main.MetaXMLObject</code></a></td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>list</code></font></td>
+<td><b><a href="../private/EaseXML.main.XMLObject-class.html#_attrsOrder"><code>_attrsOrder</code></a></b> = <span title="[]"><code>[]                                         </code>
+</span></td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>list</code></font></td>
+<td><b><a href="../private/EaseXML.main.XMLObject-class.html#_defaultEntities"><code>_defaultEntities</code></a></b> = <span title="[('&amp;', '&amp;amp;'), ('&lt;', '&amp;lt;'), ('&gt;', '&amp;gt;'), ('&quot;', '&amp;quot;'), (&quot;'&quot;, '&amp;apos;')]"><code>[('&amp;',&nbsp;'&amp;amp;'),&nbsp;('&lt;',&nbsp;'&amp;lt;'),&nbsp;('&gt;',<span class="variable-ellipsis">...</span></code>
+</span></td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>NoneType</code></font></td>
+<td><b><a href="../private/EaseXML.main.XMLObject-class.html#_dtd"><code>_dtd</code></a></b> = <span title="None">None&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>str</code></font></td>
+<td><b><a href="../private/EaseXML.main.XMLObject-class.html#_encoding"><code>_encoding</code></a></b> = <span title="'utf-8'"><code><span class="variable-quote">'</span>utf-8<span class="variable-quote">'</span>                                      </code>
+</span></td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>list</code></font></td>
+<td><b><a href="../private/EaseXML.main.XMLObject-class.html#_entities"><code>_entities</code></a></b> = <span title="[]"><code>[]                                           </code>
+</span></td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>list</code></font></td>
+<td><b><a href="../private/EaseXML.main.XMLObject-class.html#_nodesOrder"><code>_nodesOrder</code></a></b> = <span title="[]"><code>[]                                         </code>
+</span></td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>bool</code></font></td>
+<td><b><a href="../private/EaseXML.main.XMLObject-class.html#_prettyPrint"><code>_prettyPrint</code></a></b> = <span title="True"><code>True                                      </code>
+</span></td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>str</code></font></td>
+<td><b><a href="../private/EaseXML.main.XMLObject-class.html#_registry"><code>_registry</code></a></b> = <span title="'registryID'"><code><span class="variable-quote">'</span>registryID<span class="variable-quote">'</span>                                 </code>
+</span></td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>bool</code></font></td>
+<td><b><a href="../private/EaseXML.main.XMLObject-class.html#_stripStrings"><code>_stripStrings</code></a></b> = <span title="True"><code>True                                     </code>
+</span></td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>bool</code></font></td>
+<td><b><a href="../private/EaseXML.main.XMLObject-class.html#_unicodeOutput"><code>_unicodeOutput</code></a></b> = <span title="True"><code>True                                    </code>
+</span></td></tr>
+</table><br />
+
+
+<!-- =========== START OF INSTANCE METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Instance Method Details</th></tr>
+</table>
+
+<a name="__cmp__"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">__cmp__</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>other</span>)</span>
+    <br /><i>(Comparison operator)</i>
+  </h3>
+Two XMLObjects are equal if they have the same XML representation  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="forEach"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">forEach</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>callableFunc</span>,
+          <span class="sig-vararg">*args</span>,
+          <span class="sig-kwarg">**kw</span>)</span>
+  </h3>
+<p>Execute an action for <em>each</em> Node handled by an XMLObject.</p>
+<p>The head XML processing instruction is ignored. The
+<a href="EaseXML.main.XMLObject-class.html#forEach" class="link"><code>callableFunc</code></a> may have the following prototype:</p>
+<pre class="literal-block">
+def myCallable(node, xmlObject, *args, **kw):
+    # do some things with the node ?
+    pass
+</pre>
+<p><tt class="literal"><span class="pre">node</span></tt> is the Node instance to apply user-defined
+action. <tt class="literal"><span class="pre">xmlObject</span></tt> is the XMLObject instance handling
+this <tt class="literal"><span class="pre">node</span></tt>. <tt class="literal"><span class="pre">args</span></tt> and <tt class="literal"><span class="pre">kw</span></tt> store the content of their
+homonyms in the <tt class="literal"><span class="pre">forEach</span></tt> method prototype.</p>
+<p>Warning: This method can be very CPU-expensive if the
+XMLObject is deep (nested ListNodes and/or ChoiceNodes)
+because it make use of a recursion mechanism.</p>
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="get"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">get</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>nodeName</span>)</span>
+  </h3>
+Fetch a node value given its name.
+using directly (or implicitely) <code>getattr</code> is smarter.
+This method is used by the MetaAttribute instances  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getChildren"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getChildren</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+<p>Basic Introspection</p>
+<p>Fetch XMLObject node names.</p>
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getEntities"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getEntities</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+<p>Get all entities specified in the xmlobject:</p>
+<ul class="rst-simple">
+<li><a href="../private/EaseXML.main.XMLObject-class.html#_defaultEntities" class="link"><code>_defaultEntities</code></a> stores the most common entities (&lt;, &gt;, ...)</li>
+<li><a href="../private/EaseXML.main.XMLObject-class.html#_entities" class="link"><code>_entities</code></a> stores user-defined entities</li>
+</ul>
+<p>This method merges the two entities lists.</p>
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getNodes"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getNodes</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+<p>Sub-Nodes accessor</p>
+<p>Fetch XMLObject nodes. Return a hash. This method differs
+from <a href="EaseXML.main.XMLObject-class.html#toDict" class="link"><code>toDict</code></a> in the way that the hash stores Node class
+instances. So it'd be more useful if the developer wants
+to inspect an XMLObject instance.</p>
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getNodeWithName"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getNodeWithName</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>nodeName</span>)</span>
+  </h3>
+<p>Specific-Node accessor</p>
+<p>Return a <a href="EaseXML.Node.Node-class.html" class="link"><code>Node</code></a> instance given its name.
+Return None if Node doesn't exist under <tt class="literal"><span class="pre">nodeName</span></tt>.</p>
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getParentNode"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getParentNode</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+<p>Accessing the parent Node instance.</p>
+<p>Return a dummy Node() by default (see <a href="EaseXML.main.XMLObject-class.html#__init__" class="link"><code>__init__</code></a>).</p>
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="orderNodes"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">orderNodes</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>nodesList</span>=<span class=sig-default>None</span>)</span>
+  </h3>
+XMLObject remembers its children by a hash storage. Since hash
+sorting is not really friendly, this method returns two lists
+(nodeNames &amp; nodes).  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="set"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">set</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>nodeName</span>,
+          <span class=sig-arg>val</span>)</span>
+  </h3>
+Modify a node value given its name.
+Same external behaviour as <code>setattr</code>
+This method is used by the MetaAttribute instances  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="setParentNode"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">setParentNode</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>node</span>)</span>
+  </h3>
+<p>Setting the parent Node instance.</p>
+<p>When XMLObjects are stored in ChoiceNodes or in ListNodes,
+we need to keep track of their parent. This method is
+mainly used by back-storage {Mixed,Typed}List instances
+used respectively by ChoiceNodes and ListNodes.</p>
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="toDict"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">toDict</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+<p>Fetch an XMLObject instance's data in a hash mapped by Node name</p>
+<p>This method provides instant access to all data stored by an
+XMLObject instance.</p>
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="toXml"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">toXml</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>headers</span>=<span class=sig-default>1</span>,
+          <span class=sig-arg>tabLength</span>=<span class=sig-default>2</span>,
+          <span class=sig-arg>prettyPrint</span>=<span class=sig-default>True</span>)</span>
+  </h3>
+<p>Exporting an XMLObject instance to XML.</p>
+<p>Optionnal keyword parameters are:</p>
+<ul class="rst-simple">
+<li><a href="EaseXML.main.XMLObject-class.html#toXml" class="link"><code>headers</code></a> : boolean to figure out if XML data has to be headed by
+the processing instruction(s) (like &lt;?xml ..?&gt;)</li>
+<li><a href="EaseXML.main.XMLObject-class.html#toXml" class="link"><code>tabLength</code></a>: XML indentation length</li>
+</ul>
+<p>Return a string representing the XMLObject instance</p>
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="_fromDom"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">_fromDom</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>dom</span>)</span>
+  </h3>
+Building an XMLObject given its pendant DOM tree.  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="_init"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">_init</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+<p>Method executed after instance initialization (__init__).</p>
+<p>End-user can override this as he would for __init__.</p>
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF CLASS METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Class Method Details</th></tr>
+</table>
+
+<a name="fromDict"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">fromDict</span>(<span class=sig-arg>cls</span>,
+          <span class=sig-arg>aDict</span>)</span>
+  </h3>
+Build an XMLObject given its dict representation.  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="fromXml"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">fromXml</span>(<span class=sig-arg>cls</span>,
+          <span class=sig-arg>xmlData</span>)</span>
+  </h3>
+<p>Feeding an XMLObject instance with XML string data.</p>
+<p><a href="EaseXML.main.XMLObject-class.html#fromXml" class="link"><code>xmlData</code></a> is parsed by <code>xml.dom.minidom.parseString</code>.
+The resulting DOM tree is then used to build Nodes
+recursively.</p>
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getName"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getName</span>(<span class=sig-arg>cls</span>)</span>
+  </h3>
+Fetch XMLObject's instance name
+which can be redefined by <tt class="literal"><span class="pre">_name</span></tt> class attribute.
+Space (' ') characters are replaced by underscores ('_') in returned
+result.  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF CLASS VARIABLE DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Class Variable Details</th></tr>
+</table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="__name__"></a>
+<h3>__name__</h3>
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>str</code>
+
+      </dd>
+<span title="'XMLObject'">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+<span class="variable-quote">'</span>XMLObject<span class="variable-quote">'</span>                                                            </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="__nodes__"></a>
+<h3>__nodes__</h3>
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>dict</code>
+
+      </dd>
+<span title="{'xmlProcessingInstruction': &lt;EaseXML.Node.ProcessingInstructionNode object at 0xb7db308c&gt;}">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+{'xmlProcessingInstruction': &lt;EaseXML.Node.ProcessingInstructionNode o<span class="variable-linewrap">\</span>
+bject at 0xb7db308c&gt;}                                                  </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="__ns_nodes__"></a>
+<h3>__ns_nodes__</h3>
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>dict</code>
+
+      </dd>
+<span title="{}">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+{}                                                                     </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="_attrsOrder"></a>
+<h3>_attrsOrder</h3>
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>list</code>
+
+      </dd>
+<span title="[]">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+[]                                                                     </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="_defaultEntities"></a>
+<h3>_defaultEntities</h3>
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>list</code>
+
+      </dd>
+<span title="[('&amp;', '&amp;amp;'), ('&lt;', '&amp;lt;'), ('&gt;', '&amp;gt;'), ('&quot;', '&amp;quot;'), (&quot;'&quot;, '&amp;apos;')]">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+[('&amp;', '&amp;amp;'),
+ ('&lt;', '&amp;lt;'),
+ ('&gt;', '&amp;gt;'),
+ ('&quot;', '&amp;quot;'),
+ (&quot;'&quot;, '&amp;apos;')]                                                      </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="_dtd"></a>
+<h3>_dtd</h3>
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>NoneType</code>
+
+      </dd>
+<span title="None">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+None&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="_encoding"></a>
+<h3>_encoding</h3>
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>str</code>
+
+      </dd>
+<span title="'utf-8'">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+<span class="variable-quote">'</span>utf-8<span class="variable-quote">'</span>                                                                </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="_entities"></a>
+<h3>_entities</h3>
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>list</code>
+
+      </dd>
+<span title="[]">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+[]                                                                     </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="_nodesOrder"></a>
+<h3>_nodesOrder</h3>
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>list</code>
+
+      </dd>
+<span title="[]">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+[]                                                                     </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="_prettyPrint"></a>
+<h3>_prettyPrint</h3>
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>bool</code>
+
+      </dd>
+<span title="True">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+True                                                                   </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="_registry"></a>
+<h3>_registry</h3>
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>str</code>
+
+      </dd>
+<span title="'registryID'">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+<span class="variable-quote">'</span>registryID<span class="variable-quote">'</span>                                                           </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="_stripStrings"></a>
+<h3>_stripStrings</h3>
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>bool</code>
+
+      </dd>
+<span title="True">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+True                                                                   </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="_unicodeOutput"></a>
+<h3>_unicodeOutput</h3>
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>bool</code>
+
+      </dd>
+<span title="True">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+True                                                                   </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="EaseXML-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Sun Dec 12 17:20:24 2004</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

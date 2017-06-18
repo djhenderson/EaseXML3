@@ -1,0 +1,656 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.3.4: http://docutils.sourceforge.net/" />
+<title>EaseXML Documentation</title>
+<link rel="stylesheet" href="default.css" type="text/css" />
+</head>
+<body>
+<h1 class="title">EaseXML Documentation</h1>
+<div class="document" id="easexml-documentation">
+<div class="contents topic" id="menu">
+<p class="topic-title first"><a name="menu">Menu</a></p>
+<ul class="simple">
+<li><a class="reference" href="#why-using-easexml" id="id1" name="id1">Why using EaseXML ?</a></li>
+<li><a class="reference" href="#compared-to-others" id="id2" name="id2">Compared to others</a></li>
+<li><a class="reference" href="#common-behavior" id="id3" name="id3">Common behavior</a></li>
+<li><a class="reference" href="#classes-declarations" id="id4" name="id4">Classes declarations</a><ul>
+<li><a class="reference" href="#nodes" id="id5" name="id5">Nodes</a></li>
+<li><a class="reference" href="#xmlobject-options" id="id6" name="id6">XMLObject options</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#using-the-classes" id="id7" name="id7">Using the classes</a><ul>
+<li><a class="reference" href="#data-management" id="id8" name="id8">Data management</a></li>
+<li><a class="reference" href="#tree-parsing" id="id9" name="id9">Tree parsing</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#import-export" id="id10" name="id10">Import-Export</a><ul>
+<li><a class="reference" href="#dealing-with-xml" id="id11" name="id11">Dealing with XML</a></li>
+<li><a class="reference" href="#python-dictionnaries" id="id12" name="id12">Python Dictionnaries</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#about-choicenode" id="id13" name="id13">About ChoiceNode</a><ul>
+<li><a class="reference" href="#mixed-content" id="id14" name="id14">Mixed content</a></li>
+<li><a class="reference" href="#recursive-structures" id="id15" name="id15">Recursive structures</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#limitations" id="id16" name="id16">Limitations</a></li>
+<li><a class="reference" href="#exported-symbols" id="id17" name="id17">Exported Symbols</a></li>
+<li><a class="reference" href="#thanks" id="id18" name="id18">Thanks</a></li>
+<li><a class="reference" href="/index.html" id="id19" name="id19">Back</a></li>
+</ul>
+</div>
+<div class="hint">
+<p class="admonition-title first">Hint</p>
+If you're reading this file as pure ReST text, use the <cite>buildDoc</cite> script
+provided with the source distribution of EaseXML or read the HTML
+version located at www/doc.html in the source distribution.</div>
+<div class="section" id="why-using-easexml">
+<h1><a class="toc-backref" href="#id1" name="why-using-easexml">Why using EaseXML ?</a></h1>
+<p>Are you bored fighting with SAX and DOM to deal with your XML data ?
+EaseXML combines the best Object Oriented features of Python with XML
+management. Declare some classes inheriting from the <cite>XMLObject</cite> type,
+you don't have to know the internals, you deal with Objects, you get
+XML. That's all.</p>
+<p>EaseXML is released under the <a class="reference" href="http://www.python.org/psf/">Python Licence</a>, much known as PSF
+(standing for Python Standard Foundation Licence). Since EaseXML
+widely uses new-style classes it requires at least Python 2.2.</p>
+<p>If you're looking for some kind of persistance system in EaseXML, you
+may be desapointed. XMLObjects are basically designed to handle and
+store data. More <em>complex</em> concepts like circular references - which
+seem to be vital for persistance management - lack in EaseXML. There
+are <strong>real</strong> Python persistance frameworks like XMLPickle and systems
+built around YAML.</p>
+<p>EaseXML is at an early stage development. So it currently doesn't
+provide support for all XML the features described in the W3C papers. The
+effort is made on simplifying XML management. Current planned features
+are:</p>
+<ul class="simple">
+<li>xmlns support</li>
+<li>Validation (Schema, DTD, Relax NG?)</li>
+<li>Transitions from/to {Schema,DTD}</li>
+</ul>
+<p>EaseXML is not the only XML Python wrapper around. Next section
+deals with the most significant differences between EaseXML and the
+others object-xml mappers.</p>
+</div>
+<div class="section" id="compared-to-others">
+<h1><a class="toc-backref" href="#id2" name="compared-to-others">Compared to others</a></h1>
+<p>Well there is quite a bunch of XML tools in Python, especially data
+bindings. Uche Ogbuji made the <a class="reference" href="http://www.xml.com/pub/a/2004/10/13/py-xml.html">State of Python-XML in 2004</a>, a very
+interesting paper. Here i mention most (in my opinion) used data
+bindings.</p>
+<p><a class="reference" href="http://uche.ogbuji.net/tech/4Suite/anobind/">Anobind</a>, <a class="reference" href="http://effbot.org/downloads/">ElementTree</a> and <a class="reference" href="http://gnosis.cx/download/">gnosis.xml.objectify</a> can bind arbitrary
+XML data, you don't need to use or define XML grammars (Schema, DTD,
+Python classes) to make them work. All of them support XPath queries,
+namespaces, multiple parsers (scalability) and many other things i
+haven't explored yet. Between the 3, my preference goes to
+ElementTree. I believe it's the more mature and Pythonic one, it
+doesn't depends on many things other than Python itself.</p>
+<p><a class="reference" href="http://www.rexx.com/~dkuhlman/#generateDS">generateDS.py</a> is a little different from the three above. You need to
+supply an XSchema describing the data format you want to handle with
+generateDS. Then, generateDS generates Python classes acting as
+bindings to the XML data. Thus classes customization is rather limited.</p>
+<p>EaseXML takes yet another approach. Though validation support and
+arbitrary data loading are planned features, i currently prefer
+definining custom classes describing the data format i want to deal
+with. It's the simplest way, in my opinion and i admit i'm too lazy to
+write Schemas or DTDs ;-)</p>
+<p>Now let's go deeply in EaseXML !</p>
+</div>
+<div class="section" id="common-behavior">
+<h1><a class="toc-backref" href="#id3" name="common-behavior">Common behavior</a></h1>
+<p>In a wonderful world the developper would have an XML Schema, a DTD
+describing an XML grammar or even some XML samples. He would then like
+to store data in XML format conforming to that &quot;specifications&quot;. And
+finally, a program would feed and/or read valid XML data.</p>
+<p>Well, the final goal of EaseXML is to handle all of that. Though XML
+grammar support is unfinished, the developper can still define some
+Python bindings (as new-style classes) describing some implicit XML
+grammars. Then, dealing with XML data is as simple as using usual
+Python objects. Import and export routines are transparent to the
+user. Each XMLObject class instance can be expressed as an XML
+fragment.</p>
+<p>The next sections cover a little, but significant example used to show
+how to use EaseXML when designing an XML-related class
+hierarchy. We'll try to read some RSS feeds using EaseXML.</p>
+</div>
+<div class="section" id="classes-declarations">
+<h1><a class="toc-backref" href="#id4" name="classes-declarations">Classes declarations</a></h1>
+<p>Declaring EaseXML classes can be compared to writing a DTD or a
+Schema. But it's far more readable. Though for now EaseXML is less
+powerfull than DTD and Schema to handle all XML grammar
+possibilities. Here is how the first XMLObject-derived class looks
+like:</p>
+
+<pre class="literal-block"><tt><span class="keyword">class</span> <span class="function">Rss</span><span class="symbol">(</span><span class="normal">XMLObject</span><span class="symbol">)</span><span class="symbol">:</span>
+    <span class="normal">_name</span> <span class="symbol">=</span> <span class="string">'rss'</span>
+    <span class="normal">xslt</span> <span class="symbol">=</span> <span class="function">ProcessingInstructionNode</span><span class="symbol">(</span><span class="string">'xml-stylesheet'</span><span class="symbol">,</span>
+                                     <span class="symbol">[</span> <span class="symbol">(</span><span class="normal">u</span><span class="string">'type'</span><span class="symbol">,</span>
+                                        <span class="normal">u</span><span class="string">'text/css'</span><span class="symbol">)</span><span class="symbol">,</span>
+                                       <span class="symbol">(</span><span class="normal">u</span><span class="string">'href'</span><span class="symbol">,</span>
+                                        <span class="normal">u</span><span class="string">'http://foo.com/style.css'</span><span class="symbol">)</span>
+                                       <span class="symbol">]</span><span class="symbol">)</span>
+    <span class="normal">version</span> <span class="symbol">=</span> <span class="function">StringAttribute</span><span class="symbol">(</span><span class="normal">default</span><span class="symbol">=</span><span class="string">'2.0'</span><span class="symbol">)</span>
+    <span class="normal">channel</span> <span class="symbol">=</span> <span class="function">ItemNode</span><span class="symbol">(</span><span class="string">'Channel'</span><span class="symbol">)</span>
+
+    <span class="keyword">def</span> <span class="function">loadFromURL</span><span class="symbol">(</span><span class="normal">cls</span><span class="symbol">,</span> <span class="normal">url</span><span class="symbol">)</span><span class="symbol">:</span>
+        <span class="normal">data</span> <span class="symbol">=</span> <span class="normal">urllib2</span><span class="symbol">.</span><span class="function">urlopen</span><span class="symbol">(</span><span class="normal">url</span><span class="symbol">)</span><span class="symbol">.</span><span class="function">read</span><span class="symbol">(</span><span class="symbol">)</span>
+        <span class="keyword">return</span> <span class="normal">cls</span><span class="symbol">.</span><span class="function">fromXml</span><span class="symbol">(</span><span class="normal">data</span><span class="symbol">)</span>
+
+    <span class="normal">loadFromURL</span> <span class="symbol">=</span> <span class="function">classmethod</span><span class="symbol">(</span> <span class="normal">loadFromURL</span> <span class="symbol">)</span>
+</tt></pre>
+<p>As you may have guessed, the XML tag associated to that class will
+be named &quot;rss&quot;. It will have one attribute named &quot;version&quot; and a
+sub-node, handled by another XMLObject called <cite>Channel</cite> (cf its code,
+later on). The object also includes a processing instruction referring
+to an XSL stylesheet. So far so good ? It's a quite simple binding to start
+on. But following XMLObjects will be a little more complete.</p>
+<div class="section" id="nodes">
+<h2><a class="toc-backref" href="#id5" name="nodes">Nodes</a></h2>
+<p>Basically, an XMLObject holds some Nodes (<cite>StringAttribute</cite> and
+<cite>ItemNode</cite> in above example) and a set of facultative options (<cite>_name</cite>
+for instance). There are two Node families :</p>
+<ul class="simple">
+<li>The attributes (e.g <cite>&lt;obj attr=&quot;something&quot; /&gt;</cite>):<ul>
+<li>CDATAttribute : string data</li>
+<li>NMTokenAttribute : any string except <cite>:_-.</cite> characters</li>
+<li>NMTokensAttribute : NMTokenAttribute without space nor tabs nor
+carriage return characters</li>
+<li>StringAttribute : any string data (just like CDATAttribute but
+with a more friendly name)</li>
+<li>IntegerAttribute : integer data</li>
+</ul>
+</li>
+<li>The content (sub-tag) nodes:<ul>
+<li>TextNode : storing 'string' data</li>
+<li>RawNode  : storing string-with-annoying-characters (&lt;,&gt;,&amp;,...) in
+a CDATA section (example: <cite>&lt;![CDATA[blah &lt; &gt; e]]&gt;</cite>)</li>
+<li>ItemNode : referring to another XMLObject</li>
+<li>ListNode : build a list storing XMLObjects of a given type</li>
+<li>ChoiceNode : like ItemNode, but can refer to itself or any other Type of Node</li>
+<li>CommentNode : inserting comments in the XML (<cite>&lt;!-- ... --&gt;</cite>)</li>
+<li>ProcessingInstructionNode : declare an XML processing instruction  (<cite>&lt;?name option1=&quot;...&quot; ... ?&gt;</cite>)</li>
+</ul>
+</li>
+</ul>
+<p>Each Node has a set of options declared as keyword parameters to the
+Node constructor. Common Node options are:</p>
+<ul class="simple">
+<li><cite>main</cite>: boolean attribute to indicate wether the Node is the only
+one content Node (not Attribute !) handled by the XMLObject
+(<cite>False</cite> by default)</li>
+<li><cite>default</cite>: setting a default value to use when none is explicitely
+given for that Node (<cite>None</cite> by default)</li>
+<li><cite>optional</cite>: boolean switch indicating if the user can omit to set
+a value for that Node (<cite>False</cite> by default)</li>
+<li><cite>title</cite>: the name to give to the corresponding XML tag or
+attribute (defaults to the Python variable name)</li>
+<li><cite>noLimit</cite>: <strong>ChoiceNode Specific option</strong> indicating if the Node
+can behave as a multi-typed ListNode (see later for a more
+complete explanation on that option). <cite>False</cite> by default</li>
+</ul>
+</div>
+<div class="section" id="xmlobject-options">
+<h2><a class="toc-backref" href="#id6" name="xmlobject-options">XMLObject options</a></h2>
+<p>Few XMLObject class attributes may be overriden to customize the
+XMLObject behavior:</p>
+<ul class="simple">
+<li><cite>_name</cite> : providing a new string to identify the XMLObject instead
+of the class name. If <cite>_name</cite> contains some space characters, they
+are replaced by underscores.</li>
+<li><cite>_entities</cite> : a list storing tuple entities
+(e.g, <cite>('&amp;toBeReplaced;', u'this is very very long data')</cite>)</li>
+<li><cite>_encoding</cite> : a string representing the XML encoding to use during
+XML import/export. Its value defaults to 'utf-8'. The <cite>_encoding</cite> 
+attribute is very important when dealing with accentuated data.</li>
+<li><cite>_unicodeOutput</cite>: boolean switch indicating wether the XMLObject
+should output Python Unicode typed strings or not (defaults to
+<cite>True</cite>). This option is important if you're willing to communicate
+XML data with an external non-Python entity.</li>
+<li><cite>_stripStrings</cite> : a boolean value indicating whether EaseXML
+should strip strings during i/o operations. True by default.
+The <cite>_stripStrings</cite> can be very usefull with XMLObjects dealing
+with large bunches of data. When this attribute is set to False,
+<cite>toXml</cite> method's speed execution will be very improved because
+output data won't be beautified (indentations, etc.)</li>
+<li><cite>_prettyPrint</cite> : a boolean indicating whether the XML output should
+be human-readable (tags indented, ..) or not.</li>
+<li>Nodes ordering options (when order cares for XML parsers ?) By
+default, EaseXML uses the alphabetical order, you can override this
+behavior:<ul>
+<li><cite>_attrsOrder</cite>: usefull if you want to order an XMLObject
+Attributes list, e.g, <tt class="literal"><span class="pre">_attrsOrder</span> <span class="pre">=</span> <span class="pre">[</span> <span class="pre">'opt1',</span> <span class="pre">'attr2']</span></tt></li>
+<li><cite>_nodesOrder</cite>: the same, but for content Nodes.</li>
+</ul>
+</li>
+</ul>
+<p>Well, Ok. There's a little bunch of options to customize your
+XMLObjects, but in most cases you should be happy with the
+defaults. Below are last two XMLObject declarations, completing the
+example class-hierarchy (RSS 1&lt;--&gt;1 Channel 1&lt;--&gt;0..n Item)</p>
+
+<pre class="literal-block"><tt><span class="keyword">class</span> <span class="function">Channel</span><span class="symbol">(</span><span class="normal">XMLObject</span><span class="symbol">)</span><span class="symbol">:</span>
+    <span class="normal">_name</span> <span class="symbol">=</span> <span class="string">'channel'</span>
+    <span class="normal">_nodesOrder</span> <span class="symbol">=</span> <span class="symbol">[</span> <span class="string">'title'</span><span class="symbol">,</span><span class="string">'link'</span><span class="symbol">,</span> <span class="string">'description'</span><span class="symbol">,</span>
+                    <span class="string">'language'</span><span class="symbol">,</span> <span class="string">'items'</span> <span class="symbol">]</span>
+    <span class="normal">title</span> <span class="symbol">=</span> <span class="function">TextNode</span><span class="symbol">(</span><span class="normal">default</span><span class="symbol">=</span><span class="string">'Sample Channel Title'</span><span class="symbol">)</span>
+    <span class="normal">link</span>  <span class="symbol">=</span> <span class="function">TextNode</span><span class="symbol">(</span><span class="normal">default</span><span class="symbol">=</span><span class="string">'http://some/url/rss.xml'</span><span class="symbol">)</span>
+    <span class="normal">description</span> <span class="symbol">=</span> <span class="function">TextNode</span><span class="symbol">(</span><span class="string">'Sample Channel Description !!'</span><span class="symbol">)</span>
+    <span class="normal">language</span> <span class="symbol">=</span> <span class="function">TextNode</span><span class="symbol">(</span><span class="normal">default</span><span class="symbol">=</span><span class="string">'en'</span><span class="symbol">)</span>
+    <span class="normal">items</span> <span class="symbol">=</span> <span class="function">ListNode</span><span class="symbol">(</span><span class="string">'Item'</span><span class="symbol">,</span> <span class="normal">optional</span><span class="symbol">=</span><span class="normal">True</span><span class="symbol">)</span>
+
+<span class="keyword">class</span> <span class="function">Item</span><span class="symbol">(</span><span class="normal">XMLObject</span><span class="symbol">)</span><span class="symbol">:</span>
+    <span class="normal">_name</span> <span class="symbol">=</span> <span class="string">'item'</span>
+    <span class="normal">_nodesOrder</span> <span class="symbol">=</span> <span class="symbol">[</span> <span class="string">'title'</span><span class="symbol">,</span><span class="string">'link'</span><span class="symbol">,</span> <span class="string">'date'</span><span class="symbol">,</span> <span class="string">'author'</span><span class="symbol">,</span>
+                    <span class="string">'description'</span> <span class="symbol">]</span>
+    <span class="normal">title</span> <span class="symbol">=</span> <span class="function">TextNode</span><span class="symbol">(</span><span class="symbol">)</span>
+    <span class="normal">link</span> <span class="symbol">=</span> <span class="function">TextNode</span><span class="symbol">(</span><span class="symbol">)</span>
+    <span class="normal">date</span> <span class="symbol">=</span> <span class="function">TextNode</span><span class="symbol">(</span><span class="normal">name</span><span class="symbol">=</span><span class="string">'pubDate'</span><span class="symbol">,</span> <span class="normal">optional</span><span class="symbol">=</span><span class="normal">True</span><span class="symbol">)</span>
+    <span class="normal">author</span> <span class="symbol">=</span> <span class="function">TextNode</span><span class="symbol">(</span><span class="normal">optional</span><span class="symbol">=</span><span class="normal">True</span><span class="symbol">)</span>
+    <span class="normal">description</span> <span class="symbol">=</span> <span class="function">TextNode</span><span class="symbol">(</span><span class="symbol">)</span>
+</tt></pre>
+<p>After declaring your classes you can use them to store and load data.</p>
+</div>
+</div>
+<div class="section" id="using-the-classes">
+<h1><a class="toc-backref" href="#id7" name="using-the-classes">Using the classes</a></h1>
+<div class="section" id="data-management">
+<h2><a class="toc-backref" href="#id8" name="data-management">Data management</a></h2>
+<p>Since XMLObjects behave as data storage structures, there comes a time
+where the developer needs to give and/or extract data to/from the
+XMLObjects he defines in his code, such as for the RSS example below:</p>
+
+<pre class="literal-block"><tt><span class="normal">channel</span> <span class="symbol">=</span> <span class="function">Channel</span><span class="symbol">(</span><span class="normal">title</span><span class="symbol">=</span><span class="string">'EaseXML-powered RSS feed'</span><span class="symbol">)</span>
+<span class="normal">rss</span> <span class="symbol">=</span> <span class="function">Rss</span><span class="symbol">(</span><span class="normal">channel</span><span class="symbol">=</span><span class="normal">channel</span><span class="symbol">)</span>
+<span class="normal">rss</span><span class="symbol">.</span><span class="normal">channel</span><span class="symbol">.</span><span class="normal">items</span> <span class="symbol">=</span> <span class="symbol">[</span> <span class="function">Item</span><span class="symbol">(</span><span class="normal">title</span><span class="symbol">=</span><span class="string">'sample title 1'</span><span class="symbol">,</span>
+                              <span class="normal">description</span><span class="symbol">=</span><span class="string">'blah'</span><span class="symbol">,</span>
+                              <span class="normal">date</span><span class="symbol">=</span><span class="string">'2004/11/25 21:12:00'</span><span class="symbol">,</span>
+                              <span class="normal">link</span><span class="symbol">=</span><span class="string">'http://toto.com'</span><span class="symbol">)</span> <span class="symbol">]</span>
+<span class="normal">rss</span><span class="symbol">.</span><span class="normal">channel</span><span class="symbol">.</span><span class="normal">items</span><span class="symbol">.</span><span class="function">append</span><span class="symbol">(</span><span class="function">Item</span><span class="symbol">(</span><span class="normal">title</span><span class="symbol">=</span><span class="string">'sample title 2'</span><span class="symbol">,</span>
+                              <span class="normal">description</span><span class="symbol">=</span><span class="string">'blah2'</span><span class="symbol">,</span>
+                              <span class="normal">link</span><span class="symbol">=</span><span class="string">'http://foobar.fr'</span><span class="symbol">)</span><span class="symbol">)</span>
+
+<span class="normal">rss2</span> <span class="symbol">=</span> <span class="normal">Rss</span><span class="symbol">.</span><span class="function">loadFromURL</span><span class="symbol">(</span><span class="string">'http://base-art.net/wk/index.rdf'</span><span class="symbol">)</span>
+</tt></pre>
+<p>The code above is trivial to understand, we create one <cite>Rss</cite> instance to
+the which we link a <cite>Channel</cite> instance. Then we add two <cite>Item</cite> data
+holders to the channel. Thus we have an RSS feed containing two
+items. In the example above we use default values for <tt class="literal"><span class="pre">link</span></tt>,
+<tt class="literal"><span class="pre">description</span></tt> and <tt class="literal"><span class="pre">language</span></tt> attributes since they are not
+explicitely overriden.</p>
+<p><cite>ListNode</cite> behave just as Python lists, you can explicitely assign
+them, extending, inserting, iterating (of course :) on them:</p>
+
+<pre class="literal-block"><tt><span class="keyword">for</span> <span class="normal">item</span> <span class="keyword">in</span> <span class="normal">rss</span><span class="symbol">.</span><span class="normal">channel</span><span class="symbol">.</span><span class="normal">items</span><span class="symbol">:</span>
+    <span class="keyword">print</span> <span class="string">'title:'</span><span class="symbol">,</span> <span class="normal">item</span><span class="symbol">.</span><span class="normal">title</span>
+
+<span class="comment">"""</span>
+<span class="comment">title: sample title 1</span>
+<span class="comment">title: sample title 2</span>
+<span class="comment">"""</span>
+<span class="keyword">print</span> <span class="function">len</span><span class="symbol">(</span><span class="normal">rss</span><span class="symbol">.</span><span class="normal">channel</span><span class="symbol">.</span><span class="normal">items</span><span class="symbol">)</span>
+<span class="comment">"""</span>
+<span class="comment">2</span>
+<span class="comment">"""</span>
+</tt></pre>
+</div>
+<div class="section" id="tree-parsing">
+<h2><a class="toc-backref" href="#id9" name="tree-parsing">Tree parsing</a></h2>
+<p>Basically XML structures are trees, so it's very common to parse XML
+trees and perform custom actions on each node of the tree. This kind
+of thing can easily be done as shown in the example below:</p>
+
+<pre class="literal-block"><tt><span class="keyword">def</span> <span class="function">printNodeName</span><span class="symbol">(</span><span class="normal">node</span><span class="symbol">,</span> <span class="normal">xmlObject</span><span class="symbol">,</span> <span class="symbol">*</span><span class="normal">args</span><span class="symbol">,</span> <span class="symbol">*</span><span class="symbol">*</span><span class="normal">kw</span><span class="symbol">)</span><span class="symbol">:</span>
+    <span class="normal">depth</span> <span class="symbol">=</span> <span class="normal">kw</span><span class="symbol">[</span><span class="string">'depth'</span><span class="symbol">]</span>
+    <span class="keyword">print</span> <span class="string">'%s%s (%s)'</span> <span class="symbol">%</span> <span class="symbol">(</span><span class="string">'   '</span> <span class="symbol">*</span> <span class="normal">depth</span><span class="symbol">,</span> <span class="normal">xmlObject</span><span class="symbol">.</span><span class="function">getName</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">,</span>
+                         <span class="normal">node</span><span class="symbol">.</span><span class="function">getName</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">)</span>
+
+<span class="normal">rss</span><span class="symbol">.</span><span class="function">forEach</span><span class="symbol">(</span><span class="normal">printNodeName</span><span class="symbol">)</span>
+<span class="comment">"""</span>
+<span class="comment">rss (version)</span>
+<span class="comment">   channel (description)</span>
+<span class="comment">   channel (language)</span>
+<span class="comment">   channel (title)</span>
+<span class="comment">      item (description)</span>
+<span class="comment">      item (author)</span>
+<span class="comment">      item (title)</span>
+<span class="comment">      item (link)</span>
+<span class="comment">      item (pubDate)</span>
+<span class="comment">      item (description)</span>
+<span class="comment">      item (author)</span>
+<span class="comment">      item (title)</span>
+<span class="comment">      item (link)</span>
+<span class="comment">      item (pubDate)</span>
+<span class="comment">   channel (link)</span>
+<span class="comment">rss (xslt)</span>
+<span class="comment">"""</span>
+</tt></pre>
+<p>The <tt class="literal"><span class="pre">forEach</span></tt> method, applied to an XMLObject instance will perform
+a given action, symbolized by a callable object (lambda forms,
+functions) to which some parameters will be passed. The callback
+signature shall be the same as for <cite>printNodeName</cite> example
+function,e.g:</p>
+
+<pre class="literal-block"><tt><span class="keyword">def</span> <span class="function">someCallable</span><span class="symbol">(</span><span class="normal">node</span><span class="symbol">,</span> <span class="normal">xmlObject</span><span class="symbol">,</span> <span class="symbol">*</span><span class="normal">args</span><span class="symbol">,</span> <span class="symbol">*</span><span class="symbol">*</span><span class="normal">kw</span><span class="symbol">)</span><span class="symbol">:</span>
+<span class="comment">    """</span>
+<span class="comment">   - `node`: the current Node instance found by forEach</span>
+<span class="comment">   - `xmlObject`: the XMLObject instance holding the `node`</span>
+<span class="comment">   - optional named args (inherited from forEach() call)</span>
+<span class="comment">   - keyword parameters (also inherited from forEach and</span>
+<span class="comment">     extended with the "depth" (as integer) from which the</span>
+<span class="comment">     `node` is reachable to the tree root.</span>
+<span class="comment">    """</span>
+</tt></pre>
+<p>One warning though, the developer might care about <cite>forEach</cite>
+performances, especially on deep XMLObjects (e.g, with nested
+ItemNodes, ListNodes and ChoiceNodes). Walking over a deep tree can
+turn to be painful for your computer's CPU. You've been warned ;-)</p>
+</div>
+</div>
+<div class="section" id="import-export">
+<h1><a class="toc-backref" href="#id10" name="import-export">Import-Export</a></h1>
+<div class="section" id="dealing-with-xml">
+<h2><a class="toc-backref" href="#id11" name="dealing-with-xml">Dealing with XML</a></h2>
+<p>Well the final goal of EaseXML is to output some XML data. To do so,
+use the <cite>toXml</cite> method. If you want to build an XMLObject given its
+XML representation, use either the <cite>fromXml</cite> class method or
+<cite>XMLObject.instanceFromXml</cite> class method.</p>
+
+<pre class="literal-block"><tt><span class="normal">rssStr</span> <span class="symbol">=</span> <span class="normal">rss</span><span class="symbol">.</span><span class="function">toXml</span><span class="symbol">(</span><span class="symbol">)</span>
+<span class="comment"># NB: you can also use str(rss)</span>
+
+<span class="comment"># importing XML which structure matches Rss's class</span>
+<span class="comment"># data description</span>
+<span class="keyword">assert</span> <span class="normal">rssStr</span> <span class="symbol">=</span><span class="symbol">=</span> <span class="normal">Rss</span><span class="symbol">.</span><span class="function">fromXml</span><span class="symbol">(</span><span class="normal">rssStr</span><span class="symbol">)</span><span class="symbol">.</span><span class="function">toXml</span><span class="symbol">(</span><span class="symbol">)</span>
+
+<span class="comment"># generic XML import</span>
+<span class="keyword">assert</span> <span class="normal">rssStr</span> <span class="symbol">=</span><span class="symbol">=</span> <span class="normal">XMLObject</span><span class="symbol">.</span><span class="function">instanceFromXml</span><span class="symbol">(</span><span class="normal">rssStr</span><span class="symbol">)</span><span class="symbol">.</span><span class="function">toXml</span><span class="symbol">(</span><span class="symbol">)</span>
+</tt></pre>
+<p>The main advantage of using <cite>instanceFromXml</cite> over <cite>fromXml</cite> is that
+you don't need to know the class corresponding to the XML you want to
+feed in. Though currently (0.2.0), <strong>EaseXML cannot bind XML data it
+doesn't know</strong>, e.g there must exist an XMLObject class in the
+namespace either <cite>instanceFromXml</cite> will fail and raise a <cite>ParseError</cite>
+exception.</p>
+<p><cite>XMLObject.toXml()</cite> method outputs XML data as a byte string (not Unicode
+typed). Since the XML declare its own encoding, we don't need to care
+wether the string should be Unicode or not. Here is some XML sample output :</p>
+
+<pre class="literal-block"><tt><span class="keyword">print</span> <span class="normal">rss</span><span class="symbol">.</span><span class="function">toXml</span><span class="symbol">(</span><span class="symbol">)</span>
+<span class="comment">"""</span>
+<span class="comment">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span>
+<span class="comment">&lt;?xml-stylesheet type="text/css" href="http://foo.com/style.css" ?&gt;</span>
+<span class="comment">&lt;rss version="2.0"&gt;</span>
+<span class="comment">  &lt;channel&gt;</span>
+<span class="comment">    &lt;title&gt;</span>
+<span class="comment">        EaseXML-powered RSS feed</span>
+<span class="comment">    &lt;/title&gt;</span>
+<span class="comment">    &lt;link&gt;</span>
+<span class="comment">        http://some/url/rss.xml</span>
+<span class="comment">    &lt;/link&gt;</span>
+<span class="comment">    &lt;description&gt;</span>
+<span class="comment">        Sample Channel Description !!</span>
+<span class="comment">    &lt;/description&gt;</span>
+<span class="comment">    &lt;language&gt;</span>
+<span class="comment">        en</span>
+<span class="comment">    &lt;/language&gt;</span>
+<span class="comment">    &lt;item&gt;</span>
+<span class="comment">      &lt;title&gt;</span>
+<span class="comment">          sample title 1</span>
+<span class="comment">      &lt;/title&gt;</span>
+<span class="comment">      &lt;link&gt;</span>
+<span class="comment">          http://toto.com</span>
+<span class="comment">      &lt;/link&gt;</span>
+<span class="comment">      &lt;pubDate&gt;</span>
+<span class="comment">          2004/11/25 21:12:00</span>
+<span class="comment">      &lt;/pubDate&gt;</span>
+<span class="comment">      &lt;description&gt;</span>
+<span class="comment">          blah</span>
+<span class="comment">      &lt;/description&gt;</span>
+<span class="comment">    &lt;/item&gt;</span>
+<span class="comment">    &lt;item&gt;</span>
+<span class="comment">      &lt;title&gt;</span>
+<span class="comment">          samplte title 2</span>
+<span class="comment">      &lt;/title&gt;</span>
+<span class="comment">      &lt;link&gt;</span>
+<span class="comment">          http://foobar.fr</span>
+<span class="comment">      &lt;/link&gt;</span>
+<span class="comment">      &lt;description&gt;</span>
+<span class="comment">          blah2</span>
+<span class="comment">      &lt;/description&gt;</span>
+<span class="comment">    &lt;/item&gt;</span>
+<span class="comment">  &lt;/channel&gt;</span>
+<span class="comment">&lt;/rss&gt;</span>
+<span class="comment">"""</span>
+</tt></pre>
+<p>Keyword paramaters can be passed to <cite>toXml</cite> method:</p>
+<ul class="simple">
+<li><cite>headers</cite>: boolean switch to tell if you want the &lt;? ?&gt; processing
+instruction(s) placed on XML data head.</li>
+<li><cite>tabLength</cite>: integer indicating the tabulation length (2 by default)</li>
+<li><cite>prettyPrint</cite> : boolean value (True by default) overriding
+<cite>_prettyPrint</cite> class attribute.</li>
+</ul>
+<p>That's it for XML import/export API, it remains as simple as
+possible. Maybe a more Pythonic behavior : use <cite>str(myXMLObjInstance)</cite>
+to get the same result as <cite>myXMLObjInstance.toXml(headers=0)</cite>.</p>
+</div>
+<div class="section" id="python-dictionnaries">
+<h2><a class="toc-backref" href="#id12" name="python-dictionnaries">Python Dictionnaries</a></h2>
+<p>Many Python-XML data binders provide dictionary-like access to the XML
+bindings (<cite>foo[attr]</cite>). EaseXML can export data it handles as
+dictionaries, though <cite>__getitem__</cite> and <cite>__setitem__</cite> behaviors are not
+directly supported.</p>
+
+<pre class="literal-block"><tt><span class="keyword">import</span> <span class="normal">pprint</span>
+<span class="normal">pprint</span><span class="symbol">.</span><span class="function">pprint</span><span class="symbol">(</span><span class="normal">rss</span><span class="symbol">.</span><span class="function">toDict</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">)</span>
+<span class="comment">"""</span>
+<span class="comment">{'channel': {'description': 'Sample Channel Description !!',</span>
+<span class="comment">             'items': [{'author': None,</span>
+<span class="comment">                        'description': 'blah',</span>
+<span class="comment">                        'link': 'http://toto.com',</span>
+<span class="comment">                        'pubDate': '2004/11/25 21:12:00',</span>
+<span class="comment">                        'title': 'sample title 1'},</span>
+<span class="comment">                       {'author': None,</span>
+<span class="comment">                        'description': 'blah2',</span>
+<span class="comment">                        'link': 'http://foobar.fr',</span>
+<span class="comment">                        'pubDate': None,</span>
+<span class="comment">                        'title': 'sample title 2'}],</span>
+<span class="comment">             'language': 'en',</span>
+<span class="comment">             'link': 'http://some/url/rss.xml',</span>
+<span class="comment">             'title': 'EaseXML-powered RSS feed'},</span>
+<span class="comment"> 'version': '2.0',</span>
+<span class="comment"> 'xslt': [(u'type', u'text/css'), (u'href', u'http://foo.com/style.css')] }</span>
+<span class="comment">"""</span>
+</tt></pre>
+</div>
+</div>
+<div class="section" id="about-choicenode">
+<h1><a class="toc-backref" href="#id13" name="about-choicenode">About ChoiceNode</a></h1>
+<p>ChoiceNode is a little more complicated that other Node types and thus
+requires a dedicated paragraph.</p>
+<div class="section" id="mixed-content">
+<h2><a class="toc-backref" href="#id14" name="mixed-content">Mixed content</a></h2>
+<p>It's very common that a tag (say <cite>body</cite> in XHTML) stores many kinds of
+sub-tags (<cite>h1</cite>, <cite>h2, `pre</cite>, <cite>a</cite>, ...) So you want to store mixed
+content in XML, ChoiceNode is what you need. Let's consider the
+following specification:</p>
+
+<pre class="literal-block"><tt><span class="keyword">class</span> <span class="function">BBB</span><span class="symbol">(</span><span class="normal">XMLObject</span><span class="symbol">)</span><span class="symbol">:</span>
+<span class="comment">    """</span>
+<span class="comment">    &lt;!ELEMENT BBB (#PCDATA | CCC )*&gt;</span>
+<span class="comment">    """</span>
+    <span class="normal">content</span> <span class="symbol">=</span> <span class="function">ChoiceNode</span><span class="symbol">(</span><span class="symbol">[</span><span class="string">'#PCDATA'</span><span class="symbol">,</span> <span class="string">'CCC'</span><span class="symbol">]</span><span class="symbol">,</span><span class="normal">optional</span><span class="symbol">=</span><span class="normal">True</span><span class="symbol">,</span>
+                         <span class="normal">main</span><span class="symbol">=</span><span class="normal">True</span><span class="symbol">,</span> <span class="normal">noLimit</span><span class="symbol">=</span><span class="normal">True</span><span class="symbol">)</span>
+
+<span class="keyword">class</span> <span class="function">CCC</span><span class="symbol">(</span><span class="normal">XMLObject</span><span class="symbol">)</span><span class="symbol">:</span>
+<span class="comment">    """</span>
+<span class="comment">    &lt;!ELEMENT CCC (#PCDATA)&gt;</span>
+<span class="comment">    """</span>
+    <span class="normal">content</span> <span class="symbol">=</span> <span class="function">TextNode</span><span class="symbol">(</span><span class="normal">main</span><span class="symbol">=</span><span class="normal">True</span><span class="symbol">)</span>
+</tt></pre>
+<p>The <cite>BBB</cite> class which can store either strings (<cite>#PCDATA</cite>) either
+<cite>CCC</cite> objects zero or many times (<cite>*</cite>). <cite>#PCDATA</cite> is a special
+alternative handled by <cite>ChoiceNode</cite>. It means that strings without
+enclosing tag can be inserted in <cite>ChoiceNode</cite>. The following snippet
+shows how to use <cite>BBB</cite>:</p>
+
+<pre class="literal-block"><tt><span class="normal">bb2</span> <span class="symbol">=</span> <span class="function">BBB</span><span class="symbol">(</span><span class="symbol">)</span>
+<span class="normal">bb2</span><span class="symbol">.</span><span class="function">append</span><span class="symbol">(</span><span class="string">'This is'</span><span class="symbol">)</span>
+<span class="normal">bb2</span><span class="symbol">.</span><span class="function">append</span><span class="symbol">(</span><span class="function">CCC</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">)</span>
+<span class="normal">bb2</span><span class="symbol">.</span><span class="function">append</span><span class="symbol">(</span><span class="string">'a combination'</span><span class="symbol">)</span>
+<span class="normal">bb2</span><span class="symbol">.</span><span class="function">append</span><span class="symbol">(</span><span class="function">CCC</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">)</span>
+<span class="normal">bb2</span><span class="symbol">.</span><span class="function">append</span><span class="symbol">(</span><span class="string">'of'</span><span class="symbol">)</span>
+<span class="normal">bb2</span><span class="symbol">.</span><span class="function">append</span><span class="symbol">(</span><span class="function">CCC</span><span class="symbol">(</span><span class="string">'CCC elements'</span><span class="symbol">)</span><span class="symbol">)</span>
+<span class="normal">bb2</span><span class="symbol">.</span><span class="function">append</span><span class="symbol">(</span><span class="string">'and text'</span><span class="symbol">)</span>
+<span class="normal">bb2</span><span class="symbol">.</span><span class="function">append</span><span class="symbol">(</span><span class="function">CCC</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">)</span>
+<span class="normal">xxx</span><span class="symbol">.</span><span class="normal">bbb</span><span class="symbol">.</span><span class="function">append</span><span class="symbol">(</span><span class="normal">bb2</span><span class="symbol">)</span>
+
+<span class="normal">xxx</span><span class="symbol">.</span><span class="normal">bbb</span><span class="symbol">.</span><span class="function">append</span><span class="symbol">(</span><span class="function">BBB</span><span class="symbol">(</span><span class="string">'Text only.'</span><span class="symbol">)</span><span class="symbol">)</span>
+</tt></pre>
+<p>Because BBB can store many objects (<cite>noLimit=True</cite>), it behaves as a
+list, just like <cite>ListNode</cite> but it can store more than one XMLObject
+type. The XML output looks like this:</p>
+
+<pre class="literal-block"><tt><span class="string">&lt;BBB&gt;</span>
+    <span class="normal">This</span> <span class="keyword">is</span>
+  <span class="string">&lt;CCC/&gt;</span>
+    <span class="normal">a</span> <span class="normal">combination</span>
+  <span class="string">&lt;CCC/&gt;</span>
+    <span class="normal">of</span>
+  <span class="string">&lt;CCC&gt;</span>
+      <span class="normal">CCC</span> <span class="normal">elements</span>
+  <span class="string">&lt;/CCC&gt;</span>
+    <span class="keyword">and</span> <span class="normal">text</span>
+  <span class="string">&lt;CCC/&gt;</span>
+<span class="string">&lt;/BBB&gt;</span>
+<span class="string">&lt;BBB&gt;</span>
+    <span class="normal">Text</span> <span class="normal">only</span><span class="symbol">.</span>
+<span class="string">&lt;/BBB&gt;</span>
+</tt></pre>
+</div>
+<div class="section" id="recursive-structures">
+<h2><a class="toc-backref" href="#id15" name="recursive-structures">Recursive structures</a></h2>
+<p>Sometimes it's interesting to provide recursive structures. For
+instance a <cite>Section</cite> can store a <cite>title</cite>, and a <cite>Paragraph</cite> or another
+<cite>Section</cite>:</p>
+
+<pre class="literal-block"><tt><span class="keyword">class</span> <span class="function">Section</span><span class="symbol">(</span><span class="normal">XMLObject</span><span class="symbol">)</span><span class="symbol">:</span>
+    <span class="normal">_nodesOrder</span> <span class="symbol">=</span> <span class="symbol">[</span> <span class="string">'title'</span><span class="symbol">,</span> <span class="string">'mix'</span> <span class="symbol">]</span>
+    <span class="normal">title</span> <span class="symbol">=</span> <span class="function">TextNode</span><span class="symbol">(</span><span class="symbol">)</span>
+    <span class="normal">mix</span> <span class="symbol">=</span> <span class="function">ChoiceNode</span><span class="symbol">(</span><span class="symbol">[</span><span class="string">'Paragraph'</span><span class="symbol">,</span> <span class="string">'Section'</span><span class="symbol">]</span><span class="symbol">)</span>
+
+<span class="keyword">class</span> <span class="function">Paragraph</span><span class="symbol">(</span><span class="normal">XMLObject</span><span class="symbol">)</span><span class="symbol">:</span>
+    <span class="normal">content</span> <span class="symbol">=</span> <span class="function">TextNode</span><span class="symbol">(</span><span class="normal">main</span><span class="symbol">=</span><span class="normal">True</span><span class="symbol">)</span>
+</tt></pre>
+<p>But, to avoid left recursion, 'Section' reference cannot be the first
+in the alternatives list, or a <cite>LeftRecursionError</cite> will be
+raised. Using such structures is trivial:</p>
+
+<pre class="literal-block"><tt>
+<span class="normal">section</span> <span class="symbol">=</span> <span class="function">Section</span><span class="symbol">(</span><span class="symbol">)</span>
+<span class="normal">section</span><span class="symbol">.</span><span class="normal">title</span> <span class="symbol">=</span> <span class="string">'Level 1'</span>
+<span class="normal">section</span><span class="symbol">.</span><span class="normal">mix</span> <span class="symbol">=</span> <span class="function">Section</span><span class="symbol">(</span><span class="normal">title</span><span class="symbol">=</span><span class="string">'Level 2'</span><span class="symbol">,</span>
+                      <span class="normal">mix</span><span class="symbol">=</span><span class="function">Paragraph</span><span class="symbol">(</span><span class="string">'Foo bar'</span><span class="symbol">)</span><span class="symbol">)</span>
+
+<span class="keyword">print</span> <span class="normal">section</span><span class="symbol">.</span><span class="function">toXml</span><span class="symbol">(</span><span class="symbol">)</span>
+<span class="comment">"""</span>
+<span class="comment">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span>
+<span class="comment">&lt;Section&gt;</span>
+<span class="comment">  &lt;title&gt;</span>
+<span class="comment">      Level 1</span>
+<span class="comment">  &lt;/title&gt;</span>
+<span class="comment">  &lt;Section&gt;</span>
+<span class="comment">    &lt;title&gt;</span>
+<span class="comment">        Level 2</span>
+<span class="comment">    &lt;/title&gt;</span>
+<span class="comment">    &lt;Paragraph&gt;</span>
+<span class="comment">        Foo bar</span>
+<span class="comment">    &lt;/Paragraph&gt;</span>
+<span class="comment">  &lt;/Section&gt;</span>
+<span class="comment">&lt;/Section&gt;</span>
+<span class="comment">"""</span>
+</tt></pre>
+<p>We're done with ChoiceNode. Its usage remains simple when you know how
+to use it correctly :-)</p>
+</div>
+</div>
+<div class="section" id="limitations">
+<h1><a class="toc-backref" href="#id16" name="limitations">Limitations</a></h1>
+<p>As mentionned in the beginning of this document, EaseXML lacks few
+nice features, mainly validation support. Second point, EaseXML can't
+bind arbitrary XML data, e.g the developer has to define XMLObjects
+according to the XML data structures he wants to handle.</p>
+<p>Another interesting point is scalability. EaseXML has not really been
+tested with wide data sets. Internally it uses <cite>xml.minidom</cite> to parse
+incoming (<cite>fromXml</cite>) data. This parser (and more generally DOM) store
+entire data trees on dynamic memory, thus potentially eat <strong>lots</strong> of
+memory. Other parsers like <em>PyRXP</em> or <em>expat</em> may be more suitable in
+these cases and i'm considering bringing support for them in next
+EaseXML versions, though help/patches are always very welcome :-)</p>
+</div>
+<div class="section" id="exported-symbols">
+<h1><a class="toc-backref" href="#id17" name="exported-symbols">Exported Symbols</a></h1>
+<p>Simply doing <cite>from EaseXML import *</cite> won't pollute much your
+namespace. Though here are exported symbols detailled per module:</p>
+<p>From EaseXML.main:</p>
+<ul class="simple">
+<li><cite>XMLObject</cite></li>
+<li><cite>ParseError</cite></li>
+</ul>
+<p>From EaseXML.Node:</p>
+<ul class="simple">
+<li><cite>Node</cite></li>
+<li><cite>RequiredNodeError</cite></li>
+</ul>
+<p>From EaseXML.Nodes:</p>
+<ul class="simple">
+<li><cite>ItemNode</cite></li>
+<li><cite>ListNode</cite></li>
+<li><cite>TextNode</cite></li>
+<li><cite>ChoiceNode</cite></li>
+<li><cite>RawNode</cite></li>
+<li><cite>CommentNode</cite></li>
+<li><cite>ProcessingInstructionNode</cite></li>
+<li><cite>LeftRecursionError</cite> (raised by <cite>ChoiceNode</cite>)</li>
+</ul>
+<p>From EaseXML.Attributes:</p>
+<ul class="simple">
+<li><cite>CDATAttribute</cite></li>
+<li><cite>NMTokenAttribute</cite></li>
+<li><cite>NMTokensAttribute</cite></li>
+<li><cite>StringAttribute</cite></li>
+<li><cite>IntegerAttribute</cite></li>
+</ul>
+<p>For a more complete reference about EaseXML internals and API, the
+interested developer shall consult the <a class="reference" href="http://easexml.base-art.net/API/">online API documentation</a>.</p>
+</div>
+<div class="section" id="thanks">
+<h1><a class="toc-backref" href="#id18" name="thanks">Thanks</a></h1>
+<p>I'd like to thank Ian Bicking for :</p>
+<ul class="simple">
+<li>his <cite>classregistry</cite> module coming from SQLObject. This module is
+used to remember classes given their name.</li>
+<li>the <cite>examplesstripper.py</cite> script helping to produce code snippets in
+XHTML, very useful when writting this documentation sheet.</li>
+<li>SQLObject globally which is a good source of inspiration for
+EaseXML.</li>
+</ul>
+<p><a class="reference" href="http://exoweb.net">ExoWeb</a> people are active users, debuggers of EaseXML and i thank them
+for the many enhancements and feedback they provide to this software
+in general.</p>
+</div>
+<div class="section" id="back">
+<h1><a class="toc-backref" href="#id19" name="back">Back</a></h1>
+<p>Go back to index</p>
+</div>
+</div>
+<hr class="footer" />
+<div class="footer">
+Generated on: 2004-12-12 16:20 UTC.
+</div>
+</body>
+</html>

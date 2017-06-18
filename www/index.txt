@@ -1,0 +1,161 @@
+.. class:: myTitle
+
+----------------
+EaseXML
+----------------
+
+
+.. contents:: Menu
+   :backlinks: none
+
+.. image:: easexml.png
+   :scale: 100
+   :align: center
+   
+About
+=====
+
+EaseXML tends to be an object-xml mapper. It allows to translate XML to
+Python objects and vice-versa. Your developer life is made easier :
+       
+1. design some classes with special attributes
+2. manipulate the objects in the Python way
+3. translate to XML  
+
+Basically EaseXML provides a new object type : XMLObject. Of course,
+it's possible to build XMLObjects given some XML data. For further
+information, read the small documentation_ which takes an example to
+explain EaseXML's features. EaseXML is released under the Python
+Software Foundation License.
+
+The project is registered at the `Python Package Index`_ and in Freshmeat_
+
+News
+====
+
+Last news
+---------
+
+- **29 Nov 2004**:
+  New website is up ! Update your bookmarks
+
+- **24 Nov 2004**: 
+  **The project name is changing from XMLObject to EaseXML**. But
+  XMLObject class name will remain. So you will only need to modify
+  the package import statement in your code. Old news will keep trace
+  of old name. The SVN repository will be renamed, i'm wondering
+  wether i should do the same for the mailing list .. or not. Keep in
+  touch :)
+
+- **11 Nov 2004**: 
+  `Joshua Buysse`_ built a binary package of XMLObject for the CSW
+  project CSW is a set of prebuilt packages for Solaris systems. He
+  will be interested to get feedback about it. Many thanks to him !
+
+- **06 Oct 2004**:
+  A 0.1.3 maintenance release, with few bugFixes, new XMLObject class
+  attributes and bringing Unicode support, finally :-) And welcome to
+  Tobias Brox who joined the team.
+
+- **25 Sep 2004**:
+  Removed the commit monitoring list since the `EaseXML RSS Feed`_
+  appeared. The `xmlobject-discuss archives`_ are now available. 
+
+.. _`Joshua Buysse`: http://www.blastwave.org/packages.php/py_xmlobject
+.. _`xmlobject-discuss archives`: http://lists.base-art.net/archives/xmlobject-discuss
+
+Old news
+--------
+
+oldNews.html
+
+Changelog
+---------
+
+Changlelog.html
+
+Download
+========
+
+Releases
+--------
+
+Tgz directory
+
+SVN
+---
+
+EaseXML source code is now hosted on a Subversion repository on
+http://svn.base-art.net. To access it you have 3 alternatives:
+
+- browser-friendly nice output and diff capabilities with ViewCVS
+- DAV read-only access:
+
+  * `svn co http://svn.base-art.net/public/easexml`
+
+- DAV restricted read/write access:
+
+  * `svn co https://svn.base-art.net/full/easexml`
+  * ... `svn commit`
+
+- Aggregator-friendly RSS feed at:
+ 
+  * http://svn.base-art.net/easexml.xml
+
+If you want commit rights to the repository, let me know.
+The repository is organized this way (the 'classic' one):
+
+- `trunk` : Bleeding edge
+- `tags` : Mainly release marks, making a moment in the repository
+  history available
+- `branches` : Placeholder where to put long-time parallel EaseXML
+  branches
+
+Well I'm not absolutely sure of the meaning of life of the schema. So
+correct me if i'm wrong :) The SVNBook_ says it's good, i believe it.
+
+Documentation
+=============
+
+doc.html
+
+
+Contact
+=======
+
+The author
+----------
+
+Any feedback, flames, patches should be directed to me: Philippe Normand <phil =at= respyre -dot- org>
+I'm also idling on irc://irc.freenode.net/#xmlobject as philipss.
+
+The comnunity
+-------------
+
+A general purpose mailing list is available for discussions. To subscribe,
+send a mail to xmlobject-discuss-subscribe@lists.base-art.net. Then, you
+should receive a confirmation mail which you may have to reply. After all,
+to post a mail on the mailing list, send it to
+xmlobject-discuss@lists.base-art.net.
+Archives are available at:
+http://lists.base-art.net/archives/xmlobject-discuss
+
+---------------------------------------------------------------------------
+
+ReST source_
+
+
+.. _documentation: doc.html
+.. _source: index.txt
+.. _blog: http://blog.colorstudy.com/system/comments.py?u=0000001&p=P108&link=http://blog.colorstudy.com/ianb/weblog/2004/05/26.html%23P108
+.. _Changelog: Changelog.html
+.. _tip: http://www.phoenity.com/newtedge/vertical_nav/
+.. _Python Package Index: http://python.org/pypi
+.. _Freshmeat: http://freshmeat.net/projects/easexml
+.. _Christian: http://arentele.net
+.. _Big: xmlobject-big.png
+.. _Small: xmlobject-small.png
+.. _Jkx: http://larsen-b.com
+.. _EaseXML RSS Feed: http://svn.base-art.net/easexml.xml
+.. _contact: http://easexml.base-art.net/index.html#contact
+.. _SVNBook: http://svnbook.red-bean.com/svnbook/
