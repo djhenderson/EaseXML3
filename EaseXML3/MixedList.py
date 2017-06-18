@@ -6,11 +6,11 @@
 #
 # Under PSF License (see COPYING)
 
-from TypedList import TypedList
-from main import XMLObject
 import copy
-import classregistry
-from types import StringType, UnicodeType
+
+from . TypedList import TypedList
+from . main import XMLObject
+from . import classregistry
 
 class MixedList(TypedList):
     """ Multiple Type storage List
@@ -53,7 +53,7 @@ class MixedList(TypedList):
     def checkItem(self, it):
         typeMismatch = False
         alternatives = self._xmlList.getItemType()
-        if type(it) in [StringType, UnicodeType]:
+        if isinstance(it, (type(b''), type(u''))):
             if not self.walkOnXMLObject(alternatives,
                                         self._xmlList.getRegistry(),
                                         self._compareTypes, it):

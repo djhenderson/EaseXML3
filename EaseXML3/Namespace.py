@@ -7,8 +7,7 @@
 # Under PSF License (see COPYING)
 
 
-import sys
-import classregistry
+from . import classregistry
 
 class MetaNamespace(type):
 

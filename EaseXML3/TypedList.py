@@ -6,13 +6,19 @@
 #
 # Under PSF License (see COPYING)
 
+import sys
 
-import UserList, copy
-from main import XMLObject
-import classregistry
-from types import StringType, UnicodeType
+if sys.version_info[0] < 3:
+    from UserList import UserList
+else:
+    from collections import UserList
 
-class TypedList(UserList.UserList):
+import copy
+
+from . main import XMLObject
+from . import classregistry
+
+class TypedList(UserList):
     """ A *special* list implementation
 
         It stores XMLObjects all of the same type OR strings.
@@ -33,7 +39,7 @@ class TypedList(UserList.UserList):
     """
 
     def __init__(self, xmlList, data=[]):
-        UserList.UserList.__init__(self, data)
+        UserList.__init__(self, data)
         self._xmlList = xmlList
 
     def walkOnXMLObject(self,xoName, registry, callback, *args, **kw):
@@ -54,7 +60,7 @@ class TypedList(UserList.UserList):
             Used by `TypedList.walkOnXMLObject`
         """
         itemType2 = getattr(args[0],'__name__',args[0])
-        if itemType1 == '#PCDATA' and type(itemType2) in [StringType, UnicodeType]:
+        if itemType1 == '#PCDATA' and isinstance(itemType2, (type(b''), type(u''))):
             itemType1 = itemType2
         return itemType1 == itemType2
 
@@ -64,7 +70,7 @@ class TypedList(UserList.UserList):
         registry = self._xmlList.getRegistry()
         paClass = classregistry.registry(registry).getClass(parentType)
         typeMismatch = False
-        if type(it) in [StringType, UnicodeType]:
+        if isinstance(it, (type(b''), type(u''))):
             if not self.walkOnXMLObject(parentType,
                                         self._xmlList.getRegistry(),
                                         self._compareTypes, it):
@@ -87,7 +93,7 @@ class TypedList(UserList.UserList):
             #
             raise TypeError("""\
 %s type required for %s. Got %s instead""" % (repr(parentType),
-                                              repr(self._xmlList.getName()`,
+                                              repr(self._xmlList.getName()),
                                               repr(type(it))))
         if isinstance(it,XMLObject):
             if it.getClassName() == self._xmlList.getParentType():
@@ -103,15 +109,15 @@ class TypedList(UserList.UserList):
 
     def append(self, item):
         item = self.checkItem(item)
-        UserList.UserList.append(self, item)
+        UserList.append(self, item)
 
     def insert(self, index, item):
         item = self.checkItem(item)
-        UserList.UserList.insert(self,index, item)
+        UserList.insert(self,index, item)
 
     def extend(self, other):
         other2 = self.checkList(other)
-        UserList.UserList.extend(self, other2)
+        UserList.extend(self, other2)
 
     def __add__(self, other):
         other2 = self.checkList(other)
@@ -124,7 +130,7 @@ class TypedList(UserList.UserList):
 
     def __iadd__(self, other):
         other2 = self.checkList(other)
-        return UserList.UserList.__iadd__(self, other2)
+        return UserList.__iadd__(self, other2)
 
     def __radd__(self, other):
         other2 = self.checkList(other)

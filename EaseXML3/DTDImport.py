@@ -8,10 +8,10 @@
 
 from __future__ import print_function
 
-from main import *
-from Nodes import *
-from CodeGeneratorBackend import CodeGeneratorBackend
-from utils import customUnicode, titleWord
+from . main import *
+from . Nodes import *
+from . CodeGeneratorBackend import CodeGeneratorBackend
+from . utils import customUnicode, titleWord
 
 from xml.parsers.xmlproc import xmldtd
 import sys, types
@@ -53,7 +53,7 @@ def Attribute(dtdAttr):
 
     return "%s = %s(%s%s)" % (name, typ, default,permittedValues)
 
-class Element2XO:
+class Element2XO(object):
 
     def __init__(self, dtd,cog,  dtdElem):
         self.attrs = []

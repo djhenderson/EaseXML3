@@ -6,10 +6,6 @@
 #
 # Under PSF License (see COPYING)
 
-
-from types import UnicodeType, NoneType
-import sys
-
 def lowWord(word):
     " FoObar -> foObar "
     return word[0].lower() + word[1:]
@@ -48,7 +44,7 @@ def getDirectChildrenWithName(parent, name):
              node.localName == name ]
 
 def customUnicode(data, encoding):
-    if type(data) not in (UnicodeType, NoneType):
+    if not isinstance(data, (type(u''), type(None))):
         if encoding:
             data = unicode(data, encoding)
         else:

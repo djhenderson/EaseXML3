@@ -27,7 +27,7 @@ Use like::
     >>> def afterMyClassExists(cls):
     ...    print('Class finally exists:', cls)
     >>> registry.addClassCallback('MyClass', afterMyClassExists)
-    >>> class MyClass:
+    >>> class MyClass(object):
     ...    pass
     >>> registry.addClass(MyClass)
     Class finally exists: MyClass

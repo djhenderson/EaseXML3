@@ -12,12 +12,11 @@ import string, copy
 
 # ProcessingInstructionNode is defined in Node to prevent recursive import between
 # main and this module.
-from Node import Node, ProcessingInstructionNode, RequiredNodeError
-from main import XMLObject
-from TypedList import TypedList
-from MixedList import MixedList
-import classregistry, utils
-from types import StringType, UnicodeType
+from . Node import Node, ProcessingInstructionNode, RequiredNodeError
+from . main import XMLObject
+from . TypedList import TypedList
+from . MixedList import MixedList
+from . import classregistry, utils
 
 __all__ = [ 'RawNode', 'TextNode', 'ItemNode', 'ChoiceNode',
             'ProcessingInstructionNode',
@@ -312,7 +311,7 @@ Left recursivity detected in "%s" through "%s" attribute of "%s" """ %
                 result = False
         elif isinstance(val, XMLObject) and val.getClassName() not in self.alternatives:
             result = False
-        elif '#PCDATA' not in self.alternatives and type(val) in [StringType, UnicodeType]:
+        elif '#PCDATA' not in self.alternatives and isinstance(val, (type(b''), type(u''))):
             result = False
         return result
 

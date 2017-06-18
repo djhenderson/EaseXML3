@@ -14,9 +14,9 @@
 # http://www.pythonware.com
 
 
-import sys, string
+import string
 
-class CodeGeneratorBackend:
+class CodeGeneratorBackend(object):
 
     def begin(self, tab="    "):
         self.code = []

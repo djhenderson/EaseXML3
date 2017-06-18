@@ -15,18 +15,11 @@
 ## parent directory, beeing sure that we test the development version,
 ## and not any old installed version of EaseXML3.
 import sys
-sys.path.insert(0, '..')
-sys.path.insert(1, '.')
-
-from EaseXML3 import *
 import unittest
 
-## For compatibility with older python versions, not having
-## False and True.
-## (At least I assume so.  -- Tobias, 2004-10-07)
-if sys.version < '2.6':
-    True  = 0==0
-    False = 0!=0
+sys.path.insert(0, '..')
+sys.path.insert(1, '.')
+from EaseXML3 import *
 
 class Item(XMLObject):
     _entities = [ ('&xml;', 'eXtensible Markup Language')]
@@ -79,27 +72,27 @@ class TestEncoding(unittest.TestCase):
     """
 
     ## set up some norwegian special characters:
-    no_latin1='\xe6\xf8\xe5'
-    no_uc=unicode(no_latin1,'iso-8859-1')
-    no_utf8=no_uc.encode('utf8')
+    norwegian_latin1 = b'\xe6\xf8\xe5'  # literal bytes
+    norwegian_unicode = norwegian_latin1.decode('iso-8859-1')  # decode latin1 to unicode
+    norwegian_utf8 = norwegian_unicode.encode('utf-8')  # encode unicode to utf-8
 
     ## Sanity tests, not related to XMLObject:
-    assert len(no_utf8)==6
-    assert no_latin1==no_uc.encode('iso-8859-1')
+    assert len(norwegian_utf8) == 6
+    assert norwegian_latin1 == norwegian_unicode.encode('iso-8859-1')
 
     class Default(XMLObject):
         _unicodeOutput = False
-        ## default encoding is UTF8
-        testNode=TextNode()
-        testAttr=StringAttribute()
+        ## default encoding is UTF-8
+        testNode = TextNode()
+        testAttr = StringAttribute()
 
     class Latin1(Default):
-        _encoding='iso-8859-1'
+        _encoding = 'iso-8859-1'
 
     class UnicodeUTF8(Default):
         _unicodeOutput = True
 
-    def runPlainTest(self,input,xmlclass,
+    def runPlainTest(self,text_input,xmlclass,
                      expected_encoding,expected_py_output=None):
         """
         This test will create an instance of xmlclass, setting
@@ -107,14 +100,14 @@ class TestEncoding(unittest.TestCase):
         that the XML output is marked with the correct encoding.  It
         will verify that the XML is a string.  It will verify that
         when restoring the XMLObject, we get back expected_py_output
-        (defaults to input).
+        (defaults to text_input).
         """
 
         if not expected_py_output:
-            expected_py_output=input
+            expected_py_output = text_input
 
-        obj=xmlclass(testNode=input, testAttr=input)
-        xml=obj.toXml()
+        obj = xmlclass(testNode=text_input, testAttr=text_input)
+        xml = obj.toXml()
 
         ## This seems to be the first one that breaks.  Since the XML
         ## output is a text string that we eventually may want to pass
@@ -124,9 +117,9 @@ class TestEncoding(unittest.TestCase):
         ## should be treated as a byte string.
         ## @PN: doesn't break anymore.
         self.assertEquals(type(xml),str)
-        self.assert_(xml.count('encoding="%s"'%expected_encoding))
+        self.assert_(xml.count('encoding="%s"' % expected_encoding))
 
-        obj2=xmlclass.fromXml(xml)
+        obj2 = xmlclass.fromXml(xml)
         self.assertEquals(obj2, obj)
         self.assertEquals(type(obj2.testNode),type(expected_py_output))
         self.assertEquals(obj2.testNode, expected_py_output)
@@ -137,7 +130,7 @@ class TestEncoding(unittest.TestCase):
         characters in utf-8 encoding.  The default encoding is utf-8,
         and we expect utf-8 all over the line.
         """
-        self.runPlainTest(input=self.no_utf8,
+        self.runPlainTest(text_input=self.norwegian_utf8,
                           xmlclass=TestEncoding.Default,
                           expected_encoding="utf-8")
 
@@ -147,17 +140,17 @@ class TestEncoding(unittest.TestCase):
         Ideally, the object should discover that it's a unicode, and
         convert it to a utf-8 encoded string.
         """
-        self.runPlainTest(input=self.no_uc,
+        self.runPlainTest(text_input=self.norwegian_unicode,
                           xmlclass=TestEncoding.Default,
                           expected_encoding="utf-8",
-                          expected_py_output=self.no_utf8)
+                          expected_py_output=self.norwegian_utf8)
 
     def testLatin1(self):
         """
         This is trivial, essentially same test as DefaultUTF8In, just
         that we use iso-8859-1 aka latin1 now
         """
-        self.runPlainTest(input=self.no_latin1,
+        self.runPlainTest(text_input=self.norwegian_latin1,
                           xmlclass=TestEncoding.Latin1,
                           expected_encoding="iso-8859-1")
 
@@ -166,18 +159,18 @@ class TestEncoding(unittest.TestCase):
         So, we use the class with the Unicode-flag, both input and
         output of the testAttr and testNode is a unicode-typed string.
         """
-        self.runPlainTest(input=self.no_uc,
+        self.runPlainTest(text_input=self.norwegian_unicode,
                           xmlclass=TestEncoding.UnicodeUTF8,
                           expected_encoding="utf-8")
 
     def testUnicodedObj(self):
         """
-        As testUnicodeObj, but we give the input as an utf-8-string
+        As testUnicodeObj, but we give the text_input as an utf-8-string
         """
-        self.runPlainTest(input=self.no_utf8,
+        self.runPlainTest(text_input=self.norwegian_utf8,
                           xmlclass=TestEncoding.UnicodeUTF8,
                           expected_encoding="utf-8",
-                          expected_py_output=self.no_uc)
+                          expected_py_output=self.norwegian_unicode)
 
 
 class GetSetTest(unittest.TestCase):
@@ -288,7 +281,7 @@ class NewNameTest(unittest.TestCase):
         self.assertRaises(ValueError, IntTest().toXml)
         self.assertRaises(ValueError, IntTest().toXml)
 
-class ImportExport:
+class ImportExport(object):
     """ Partial Mixin for import/export tests.
 
         This class should be used in a mixin with `GetSetTest` class
@@ -387,7 +380,7 @@ class InheritanceTest(unittest.TestCase):
         import logging
         logging.getLogger().setLevel(logging.ERROR)
 
-        class Dummy:
+        class Dummy(object):
             _name = 'foo bar'
 
         class MyOtherPlaylist(Playlist, Dummy):

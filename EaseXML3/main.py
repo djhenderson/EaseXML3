@@ -19,11 +19,12 @@ from xml.dom.minidom import parseString
 import logging
 logging.basicConfig()
 
-import classregistry, utils
-from Node import Node, ProcessingInstructionNode
-from Attributes import Attribute
-from PrettyXMLPrinter import PrettyXMLPrinter
-from Namespace import getAllNamespaces
+from . import classregistry
+from . import utils
+from . Node import Node, ProcessingInstructionNode
+from . Attributes import Attribute
+from . PrettyXMLPrinter import PrettyXMLPrinter
+from . Namespace import getAllNamespaces
 
 __all__ = [ 'XMLObject', 'ParseError']
 
@@ -506,7 +507,7 @@ class XMLObject(object):
         """
         name = cls.__name__
         if hasattr(cls, '_name'):
-            if type(cls._name) not in [types.StringType, types.UnicodeType]:
+            if not isinstance(cls._name, (type(b''), type(u''))):
                 raise ValueError("Incorrect '_name' for %s: '%s'" % (name,cls._name))
             name = cls._name
         name = name.replace(' ','_')

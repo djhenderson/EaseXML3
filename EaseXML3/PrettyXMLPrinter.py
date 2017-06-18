@@ -29,7 +29,7 @@ class NoCallbackError(Exception):
 
     __repr__ = __str__
 
-class PrettyXMLPrinter:
+class PrettyXMLPrinter(object):
     regexps = [ ('processing_instruction', re.compile('<\?([^?]*)\?>')),
                 ('cdata', re.compile('<\!\[CDATA\[(.*\s*.*)\]\]>',re.DOTALL)),
                 ('comment', re.compile('<\!-- ([^<\-\-]*) -->')),

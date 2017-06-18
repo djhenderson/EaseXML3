@@ -6,10 +6,9 @@
 #
 # Under PSF License (see COPYING)
 
-
-import classregistry, utils
-from Node import Node, RequiredNodeError
-from types import StringType, UnicodeType
+from . import classregistry
+from . import utils
+from . Node import Node, RequiredNodeError
 
 __all__ = [ 'CDATAttribute', 'NMTokenAttribute', 'NMTokensAttribute',
             'IntegerAttribute', 'StringAttribute' ]
@@ -53,7 +52,7 @@ class CDATAttribute(Attribute):
         result = False
         if self.isOptional() and val in (None,self.getDefaultValue()):
             result = val
-        elif type(val) in [StringType, UnicodeType] and Attribute.checkType(self, val):
+        elif isinstance(val, (type(b''), type(u''))) and Attribute.checkType(self, val):
             result = val
         return result
 
