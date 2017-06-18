@@ -10,12 +10,13 @@
 from __future__ import print_function
 
 import sys, os
-from epydoc import cli, objdoc
+from epydoc import cli
+# from epydoc import objdoc
 
 os.chdir('..')
 sys.argv.extend(['-o','www/API','EaseXML3'])
 
-objdoc.set_default_docformat('restructuredtext')
+# objdoc.set_default_docformat('restructuredtext')
 cli.cli()
 
 print('Done')

@@ -1,3 +1,4 @@
+#! python
 # -*- coding: utf-8 -*-
 # Copyright © 2017 Doug Henderson <djndnbvg@gmail.com>
 # Copyright (C) 2004 Philippe Normand <phil@respyre.org>

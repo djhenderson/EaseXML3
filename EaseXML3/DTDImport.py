@@ -8,13 +8,14 @@
 
 from __future__ import print_function
 
+import sys
+
 from . main import *
 from . Nodes import *
 from . CodeGeneratorBackend import CodeGeneratorBackend
 from . utils import customUnicode, titleWord
 
 from xml.parsers.xmlproc import xmldtd
-import sys, types
 
 raise Exception('Not ready at all')
 
@@ -51,11 +52,11 @@ def Attribute(dtdAttr):
     else:
         typ = typs[typ]
 
-    return "%s = %s(%s%s)" % (name, typ, default,permittedValues)
+    return "%s = %s(%s%s)" % (name, typ, default, permittedValues)
 
 class Element2XO(object):
 
-    def __init__(self, dtd,cog,  dtdElem):
+    def __init__(self, dtd, cog, dtdElem):
         self.attrs = []
         self.dtd = dtd
         self.elem = dtdElem
@@ -95,7 +96,7 @@ class Element2XO(object):
                     print('<<<<<<', mod)
                     continue
 
-                modMap = {'?' : ['optional=True','once=True'],
+                modMap = {'?' : ['optional=True',  'once=True'],
                           '+' : ['optional=False', 'once=False'],
                           '*' : ['optional=True',  'once=False'],
                           ''  : []
@@ -106,13 +107,13 @@ class Element2XO(object):
                     pass
                 #else:
                 #    print('>>>>>>>>>>>>>>>>>>>>',entity, name)
-                print(self.name,wrapper,'<<<<', name, mod, 'ok')
+                print(self.name, wrapper, '<<<<', name, mod, 'ok')
                 if wrapper == 'ItemNode':
                     name2 = ["'%s'" % titleWord(name) ]
                 else:
                     name2 = []
 
-                nodes.append("%s = %s(%s)" % (name,wrapper,','.join(name2+modMap[mod])))
+                nodes.append("%s = %s(%s)" % (name, wrapper, ','.join(name2+modMap[mod])))
             elif len(cp) == 3:
                 nodes.extend(self.processModel(cp))
             else:
@@ -141,7 +142,7 @@ def processDTD(aDTD, outFile=None):
     elements = []
     for elemname in dtd.get_elements():
         elem = dtd.get_elem(elemname)
-        elements.append( Element2XO(dtd,c,elem) )
+        elements.append( Element2XO(dtd, c, elem) )
 
     if outFile == "stdout":
         print(c.end())
@@ -156,4 +157,4 @@ if __name__ == '__main__':
     else:
         out = sys.argv[-1]
 
-    processDTD(dtd,out)
+    processDTD(dtd, out)

@@ -10,5 +10,5 @@ try:
     import EaseXML3
 except ImportError:
     import sys
-    sys.path.insert(0,'..')
+    sys.path.insert(0, '..')
     import EaseXML3
