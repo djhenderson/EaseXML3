@@ -76,7 +76,7 @@ class ClassRegistry(object):
         callbacks that are waiting for the class.
         """
         self.classes[cls.__name__] = cls
-        if self.callbacks.has_key(cls.__name__):
+        if cls.__name__ in self.callbacks:
             for callback, args, kw in self.callbacks[cls.__name__]:
                 callback(cls, *args, **kw)
             del self.callbacks[cls.__name__]
@@ -103,7 +103,7 @@ class _MasterRegistry(object):
         self.registries = {}
 
     def registry(self, item):
-        if not self.registries.has_key(item):
+        if not item in self.registries:
             self.registries[item] = ClassRegistry(item)
         return self.registries[item]
 

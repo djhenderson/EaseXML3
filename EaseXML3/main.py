@@ -157,7 +157,7 @@ class MetaXMLObject(type):
 
 
         # add the xmlProcessingInstruction
-        if newClass.__nodes__.has_key(XML_PI):
+        if XML_PI in newClass.__nodes__:
             del newClass.__nodes__[XML_PI]
         xmlPI = ProcessingInstructionNode('xml',[(u'version',u'1.0'),
                                                  (u'encoding', newClass._encoding)
@@ -456,7 +456,7 @@ class XMLObject(object):
             XMLObject is deep (nested ListNodes and/or ChoiceNodes)
             because it make use of a recursion mechanism.
         """
-        if not kw.has_key('depth'):
+        if not 'depth' in kw:
             kw['depth'] = 0
         depth = kw['depth']
         for nodeName,node in self.getNodes().iteritems():

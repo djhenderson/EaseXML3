@@ -14,7 +14,7 @@ class MetaNamespace(type):
 
     def __new__(cls, className, bases, dictionnary):
 
-        if not dictionnary.has_key('__name__'):
+        if not '__name__' in dictionnary:
             dictionnary['__name__'] = className
         newClass = type.__new__(cls, className, bases, dictionnary)
         classregistry.registry('namespaces').addClass(newClass)

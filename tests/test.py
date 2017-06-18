@@ -24,15 +24,8 @@ import unittest
 ## For compatibility with older python versions, not having
 ## False and True.
 ## (At least I assume so.  -- Tobias, 2004-10-07)
-try:
-    if True:
-        pass
-except ValueError:
+if sys.version < '2.6':
     True  = 0==0
-try:
-    if not False:
-        pass
-except ValueError:
     False = 0!=0
 
 class Item(XMLObject):
@@ -683,7 +676,7 @@ class ExoWebTests(unittest.TestCase):
         self.assertEquals(C<None,False)
         self.assertEquals(C==None,False)
         self.assertEquals(C>None,True)
-        self.assertEquals(C<>None,True)
+        self.assertEquals(C!=None,True)
         self.assertEquals(C!=None,True)
 
     def testRequiredAttribute(self):
