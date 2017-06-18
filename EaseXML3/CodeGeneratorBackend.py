@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+# Copyright © 2017 Doug Henderson <djndnbvg@gmail.com>
+# Copyright (C) 2004 Philippe Normand <phil@respyre.org>
+#
+# This file is part of EaseXML3 (http://easexml.base-art.net)
+#
+# Under PSF License (see COPYING)
 #
 # a Python code generator backend
 #
@@ -5,9 +12,6 @@
 #
 # fredrik@pythonware.com
 # http://www.pythonware.com
-#
-# $HeadURL: https://svn.base-art.net/full/easexml/trunk/EaseXML/CodeGeneratorBackend.py $
-# $Id: CodeGeneratorBackend.py 76 2004-11-11 20:31:59Z phil $
 
 
 import sys, string

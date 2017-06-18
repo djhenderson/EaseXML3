@@ -4,16 +4,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="Docutils 0.3.4: http://docutils.sourceforge.net/" />
-<title>EaseXML Documentation</title>
+<title>EaseXML3 Documentation</title>
 <link rel="stylesheet" href="default.css" type="text/css" />
 </head>
 <body>
-<h1 class="title">EaseXML Documentation</h1>
+<h1 class="title">EaseXML3 Documentation</h1>
 <div class="document" id="easexml-documentation">
 <div class="contents topic" id="menu">
 <p class="topic-title first"><a name="menu">Menu</a></p>
 <ul class="simple">
-<li><a class="reference" href="#why-using-easexml" id="id1" name="id1">Why using EaseXML ?</a></li>
+<li><a class="reference" href="#why-using-easexml" id="id1" name="id1">Why using EaseXML3 ?</a></li>
 <li><a class="reference" href="#compared-to-others" id="id2" name="id2">Compared to others</a></li>
 <li><a class="reference" href="#common-behavior" id="id3" name="id3">Common behavior</a></li>
 <li><a class="reference" href="#classes-declarations" id="id4" name="id4">Classes declarations</a><ul>
@@ -45,25 +45,25 @@
 <div class="hint">
 <p class="admonition-title first">Hint</p>
 If you're reading this file as pure ReST text, use the <cite>buildDoc</cite> script
-provided with the source distribution of EaseXML or read the HTML
+provided with the source distribution of EaseXML3 or read the HTML
 version located at www/doc.html in the source distribution.</div>
 <div class="section" id="why-using-easexml">
-<h1><a class="toc-backref" href="#id1" name="why-using-easexml">Why using EaseXML ?</a></h1>
+<h1><a class="toc-backref" href="#id1" name="why-using-easexml">Why using EaseXML3 ?</a></h1>
 <p>Are you bored fighting with SAX and DOM to deal with your XML data ?
-EaseXML combines the best Object Oriented features of Python with XML
+EaseXML3 combines the best Object Oriented features of Python with XML
 management. Declare some classes inheriting from the <cite>XMLObject</cite> type,
 you don't have to know the internals, you deal with Objects, you get
 XML. That's all.</p>
-<p>EaseXML is released under the <a class="reference" href="http://www.python.org/psf/">Python Licence</a>, much known as PSF
-(standing for Python Standard Foundation Licence). Since EaseXML
+<p>EaseXML3 is released under the <a class="reference" href="http://www.python.org/psf/">Python Licence</a>, much known as PSF
+(standing for Python Standard Foundation Licence). Since EaseXML3
 widely uses new-style classes it requires at least Python 2.2.</p>
-<p>If you're looking for some kind of persistance system in EaseXML, you
+<p>If you're looking for some kind of persistance system in EaseXML3, you
 may be desapointed. XMLObjects are basically designed to handle and
 store data. More <em>complex</em> concepts like circular references - which
-seem to be vital for persistance management - lack in EaseXML. There
+seem to be vital for persistance management - lack in EaseXML3. There
 are <strong>real</strong> Python persistance frameworks like XMLPickle and systems
 built around YAML.</p>
-<p>EaseXML is at an early stage development. So it currently doesn't
+<p>EaseXML3 is at an early stage development. So it currently doesn't
 provide support for all XML the features described in the W3C papers. The
 effort is made on simplifying XML management. Current planned features
 are:</p>
@@ -72,8 +72,8 @@ are:</p>
 <li>Validation (Schema, DTD, Relax NG?)</li>
 <li>Transitions from/to {Schema,DTD}</li>
 </ul>
-<p>EaseXML is not the only XML Python wrapper around. Next section
-deals with the most significant differences between EaseXML and the
+<p>EaseXML3 is not the only XML Python wrapper around. Next section
+deals with the most significant differences between EaseXML3 and the
 others object-xml mappers.</p>
 </div>
 <div class="section" id="compared-to-others">
@@ -93,12 +93,12 @@ doesn't depends on many things other than Python itself.</p>
 supply an XSchema describing the data format you want to handle with
 generateDS. Then, generateDS generates Python classes acting as
 bindings to the XML data. Thus classes customization is rather limited.</p>
-<p>EaseXML takes yet another approach. Though validation support and
+<p>EaseXML3 takes yet another approach. Though validation support and
 arbitrary data loading are planned features, i currently prefer
 definining custom classes describing the data format i want to deal
 with. It's the simplest way, in my opinion and i admit i'm too lazy to
 write Schemas or DTDs ;-)</p>
-<p>Now let's go deeply in EaseXML !</p>
+<p>Now let's go deeply in EaseXML3 !</p>
 </div>
 <div class="section" id="common-behavior">
 <h1><a class="toc-backref" href="#id3" name="common-behavior">Common behavior</a></h1>
@@ -106,7 +106,7 @@ write Schemas or DTDs ;-)</p>
 describing an XML grammar or even some XML samples. He would then like
 to store data in XML format conforming to that &quot;specifications&quot;. And
 finally, a program would feed and/or read valid XML data.</p>
-<p>Well, the final goal of EaseXML is to handle all of that. Though XML
+<p>Well, the final goal of EaseXML3 is to handle all of that. Though XML
 grammar support is unfinished, the developper can still define some
 Python bindings (as new-style classes) describing some implicit XML
 grammars. Then, dealing with XML data is as simple as using usual
@@ -114,13 +114,13 @@ Python objects. Import and export routines are transparent to the
 user. Each XMLObject class instance can be expressed as an XML
 fragment.</p>
 <p>The next sections cover a little, but significant example used to show
-how to use EaseXML when designing an XML-related class
-hierarchy. We'll try to read some RSS feeds using EaseXML.</p>
+how to use EaseXML3 when designing an XML-related class
+hierarchy. We'll try to read some RSS feeds using EaseXML3.</p>
 </div>
 <div class="section" id="classes-declarations">
 <h1><a class="toc-backref" href="#id4" name="classes-declarations">Classes declarations</a></h1>
-<p>Declaring EaseXML classes can be compared to writing a DTD or a
-Schema. But it's far more readable. Though for now EaseXML is less
+<p>Declaring EaseXML3 classes can be compared to writing a DTD or a
+Schema. But it's far more readable. Though for now EaseXML3 is less
 powerfull than DTD and Schema to handle all XML grammar
 possibilities. Here is how the first XMLObject-derived class looks
 like:</p>
@@ -204,13 +204,13 @@ are replaced by underscores.</li>
 <li><cite>_entities</cite> : a list storing tuple entities
 (e.g, <cite>('&amp;toBeReplaced;', u'this is very very long data')</cite>)</li>
 <li><cite>_encoding</cite> : a string representing the XML encoding to use during
-XML import/export. Its value defaults to 'utf-8'. The <cite>_encoding</cite> 
+XML import/export. Its value defaults to 'utf-8'. The <cite>_encoding</cite>
 attribute is very important when dealing with accentuated data.</li>
 <li><cite>_unicodeOutput</cite>: boolean switch indicating wether the XMLObject
 should output Python Unicode typed strings or not (defaults to
 <cite>True</cite>). This option is important if you're willing to communicate
 XML data with an external non-Python entity.</li>
-<li><cite>_stripStrings</cite> : a boolean value indicating whether EaseXML
+<li><cite>_stripStrings</cite> : a boolean value indicating whether EaseXML3
 should strip strings during i/o operations. True by default.
 The <cite>_stripStrings</cite> can be very usefull with XMLObjects dealing
 with large bunches of data. When this attribute is set to False,
@@ -219,7 +219,7 @@ output data won't be beautified (indentations, etc.)</li>
 <li><cite>_prettyPrint</cite> : a boolean indicating whether the XML output should
 be human-readable (tags indented, ..) or not.</li>
 <li>Nodes ordering options (when order cares for XML parsers ?) By
-default, EaseXML uses the alphabetical order, you can override this
+default, EaseXML3 uses the alphabetical order, you can override this
 behavior:<ul>
 <li><cite>_attrsOrder</cite>: usefull if you want to order an XMLObject
 Attributes list, e.g, <tt class="literal"><span class="pre">_attrsOrder</span> <span class="pre">=</span> <span class="pre">[</span> <span class="pre">'opt1',</span> <span class="pre">'attr2']</span></tt></li>
@@ -263,7 +263,7 @@ example class-hierarchy (RSS 1&lt;--&gt;1 Channel 1&lt;--&gt;0..n Item)</p>
 where the developer needs to give and/or extract data to/from the
 XMLObjects he defines in his code, such as for the RSS example below:</p>
 
-<pre class="literal-block"><tt><span class="normal">channel</span> <span class="symbol">=</span> <span class="function">Channel</span><span class="symbol">(</span><span class="normal">title</span><span class="symbol">=</span><span class="string">'EaseXML-powered RSS feed'</span><span class="symbol">)</span>
+<pre class="literal-block"><tt><span class="normal">channel</span> <span class="symbol">=</span> <span class="function">Channel</span><span class="symbol">(</span><span class="normal">title</span><span class="symbol">=</span><span class="string">'EaseXML3-powered RSS feed'</span><span class="symbol">)</span>
 <span class="normal">rss</span> <span class="symbol">=</span> <span class="function">Rss</span><span class="symbol">(</span><span class="normal">channel</span><span class="symbol">=</span><span class="normal">channel</span><span class="symbol">)</span>
 <span class="normal">rss</span><span class="symbol">.</span><span class="normal">channel</span><span class="symbol">.</span><span class="normal">items</span> <span class="symbol">=</span> <span class="symbol">[</span> <span class="function">Item</span><span class="symbol">(</span><span class="normal">title</span><span class="symbol">=</span><span class="string">'sample title 1'</span><span class="symbol">,</span>
                               <span class="normal">description</span><span class="symbol">=</span><span class="string">'blah'</span><span class="symbol">,</span>
@@ -354,7 +354,7 @@ turn to be painful for your computer's CPU. You've been warned ;-)</p>
 <h1><a class="toc-backref" href="#id10" name="import-export">Import-Export</a></h1>
 <div class="section" id="dealing-with-xml">
 <h2><a class="toc-backref" href="#id11" name="dealing-with-xml">Dealing with XML</a></h2>
-<p>Well the final goal of EaseXML is to output some XML data. To do so,
+<p>Well the final goal of EaseXML3 is to output some XML data. To do so,
 use the <cite>toXml</cite> method. If you want to build an XMLObject given its
 XML representation, use either the <cite>fromXml</cite> class method or
 <cite>XMLObject.instanceFromXml</cite> class method.</p>
@@ -371,7 +371,7 @@ XML representation, use either the <cite>fromXml</cite> class method or
 </tt></pre>
 <p>The main advantage of using <cite>instanceFromXml</cite> over <cite>fromXml</cite> is that
 you don't need to know the class corresponding to the XML you want to
-feed in. Though currently (0.2.0), <strong>EaseXML cannot bind XML data it
+feed in. Though currently (0.2.0), <strong>EaseXML3 cannot bind XML data it
 doesn't know</strong>, e.g there must exist an XMLObject class in the
 namespace either <cite>instanceFromXml</cite> will fail and raise a <cite>ParseError</cite>
 exception.</p>
@@ -386,7 +386,7 @@ wether the string should be Unicode or not. Here is some XML sample output :</p>
 <span class="comment">&lt;rss version="2.0"&gt;</span>
 <span class="comment">  &lt;channel&gt;</span>
 <span class="comment">    &lt;title&gt;</span>
-<span class="comment">        EaseXML-powered RSS feed</span>
+<span class="comment">        EaseXML3-powered RSS feed</span>
 <span class="comment">    &lt;/title&gt;</span>
 <span class="comment">    &lt;link&gt;</span>
 <span class="comment">        http://some/url/rss.xml</span>
@@ -441,7 +441,7 @@ to get the same result as <cite>myXMLObjInstance.toXml(headers=0)</cite>.</p>
 <div class="section" id="python-dictionnaries">
 <h2><a class="toc-backref" href="#id12" name="python-dictionnaries">Python Dictionnaries</a></h2>
 <p>Many Python-XML data binders provide dictionary-like access to the XML
-bindings (<cite>foo[attr]</cite>). EaseXML can export data it handles as
+bindings (<cite>foo[attr]</cite>). EaseXML3 can export data it handles as
 dictionaries, though <cite>__getitem__</cite> and <cite>__setitem__</cite> behaviors are not
 directly supported.</p>
 
@@ -461,7 +461,7 @@ directly supported.</p>
 <span class="comment">                        'title': 'sample title 2'}],</span>
 <span class="comment">             'language': 'en',</span>
 <span class="comment">             'link': 'http://some/url/rss.xml',</span>
-<span class="comment">             'title': 'EaseXML-powered RSS feed'},</span>
+<span class="comment">             'title': 'EaseXML3-powered RSS feed'},</span>
 <span class="comment"> 'version': '2.0',</span>
 <span class="comment"> 'xslt': [(u'type', u'text/css'), (u'href', u'http://foo.com/style.css')] }</span>
 <span class="comment">"""</span>
@@ -580,33 +580,33 @@ to use it correctly :-)</p>
 </div>
 <div class="section" id="limitations">
 <h1><a class="toc-backref" href="#id16" name="limitations">Limitations</a></h1>
-<p>As mentionned in the beginning of this document, EaseXML lacks few
-nice features, mainly validation support. Second point, EaseXML can't
+<p>As mentionned in the beginning of this document, EaseXML3 lacks few
+nice features, mainly validation support. Second point, EaseXML3 can't
 bind arbitrary XML data, e.g the developer has to define XMLObjects
 according to the XML data structures he wants to handle.</p>
-<p>Another interesting point is scalability. EaseXML has not really been
+<p>Another interesting point is scalability. EaseXML3 has not really been
 tested with wide data sets. Internally it uses <cite>xml.minidom</cite> to parse
 incoming (<cite>fromXml</cite>) data. This parser (and more generally DOM) store
 entire data trees on dynamic memory, thus potentially eat <strong>lots</strong> of
 memory. Other parsers like <em>PyRXP</em> or <em>expat</em> may be more suitable in
 these cases and i'm considering bringing support for them in next
-EaseXML versions, though help/patches are always very welcome :-)</p>
+EaseXML3 versions, though help/patches are always very welcome :-)</p>
 </div>
 <div class="section" id="exported-symbols">
 <h1><a class="toc-backref" href="#id17" name="exported-symbols">Exported Symbols</a></h1>
-<p>Simply doing <cite>from EaseXML import *</cite> won't pollute much your
+<p>Simply doing <cite>from EaseXML3 import *</cite> won't pollute much your
 namespace. Though here are exported symbols detailled per module:</p>
-<p>From EaseXML.main:</p>
+<p>From EaseXML3.main:</p>
 <ul class="simple">
 <li><cite>XMLObject</cite></li>
 <li><cite>ParseError</cite></li>
 </ul>
-<p>From EaseXML.Node:</p>
+<p>From EaseXML3.Node:</p>
 <ul class="simple">
 <li><cite>Node</cite></li>
 <li><cite>RequiredNodeError</cite></li>
 </ul>
-<p>From EaseXML.Nodes:</p>
+<p>From EaseXML3.Nodes:</p>
 <ul class="simple">
 <li><cite>ItemNode</cite></li>
 <li><cite>ListNode</cite></li>
@@ -617,7 +617,7 @@ namespace. Though here are exported symbols detailled per module:</p>
 <li><cite>ProcessingInstructionNode</cite></li>
 <li><cite>LeftRecursionError</cite> (raised by <cite>ChoiceNode</cite>)</li>
 </ul>
-<p>From EaseXML.Attributes:</p>
+<p>From EaseXML3.Attributes:</p>
 <ul class="simple">
 <li><cite>CDATAttribute</cite></li>
 <li><cite>NMTokenAttribute</cite></li>
@@ -625,7 +625,7 @@ namespace. Though here are exported symbols detailled per module:</p>
 <li><cite>StringAttribute</cite></li>
 <li><cite>IntegerAttribute</cite></li>
 </ul>
-<p>For a more complete reference about EaseXML internals and API, the
+<p>For a more complete reference about EaseXML3 internals and API, the
 interested developer shall consult the <a class="reference" href="http://easexml.base-art.net/API/">online API documentation</a>.</p>
 </div>
 <div class="section" id="thanks">
@@ -637,9 +637,9 @@ used to remember classes given their name.</li>
 <li>the <cite>examplesstripper.py</cite> script helping to produce code snippets in
 XHTML, very useful when writting this documentation sheet.</li>
 <li>SQLObject globally which is a good source of inspiration for
-EaseXML.</li>
+EaseXML3.</li>
 </ul>
-<p><a class="reference" href="http://exoweb.net">ExoWeb</a> people are active users, debuggers of EaseXML and i thank them
+<p><a class="reference" href="http://exoweb.net">ExoWeb</a> people are active users, debuggers of EaseXML3 and i thank them
 for the many enhancements and feedback they provide to this software
 in general.</p>
 </div>

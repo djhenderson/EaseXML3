@@ -1,4 +1,12 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# Copyright © 2017 Doug Henderson <djndnbvg@gmail.com>
+# Copyright (C) 2004 Philippe Normand <phil@respyre.org>
+#
+# This file is part of EaseXML3 (http://easexml.base-art.net)
+#
+# Under PSF License (see COPYING)
+
 """
 This script strips bits of examples from a larger script, formats
 them as HTML, and writes them out.

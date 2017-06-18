@@ -1,7 +1,7 @@
 .. class:: myTitle
 
 ----------------
-EaseXML
+EaseXML3
 ----------------
 
 
@@ -11,21 +11,21 @@ EaseXML
 .. image:: easexml.png
    :scale: 100
    :align: center
-   
+
 About
 =====
 
-EaseXML tends to be an object-xml mapper. It allows to translate XML to
+EaseXML3 tends to be an object-xml mapper. It allows to translate XML to
 Python objects and vice-versa. Your developer life is made easier :
-       
+
 1. design some classes with special attributes
 2. manipulate the objects in the Python way
-3. translate to XML  
+3. translate to XML
 
-Basically EaseXML provides a new object type : XMLObject. Of course,
+Basically EaseXML3 provides a new object type : XMLObject. Of course,
 it's possible to build XMLObjects given some XML data. For further
 information, read the small documentation_ which takes an example to
-explain EaseXML's features. EaseXML is released under the Python
+explain EaseXML3's features. EaseXML3 is released under the Python
 Software Foundation License.
 
 The project is registered at the `Python Package Index`_ and in Freshmeat_
@@ -39,15 +39,15 @@ Last news
 - **29 Nov 2004**:
   New website is up ! Update your bookmarks
 
-- **24 Nov 2004**: 
-  **The project name is changing from XMLObject to EaseXML**. But
+- **24 Nov 2004**:
+  **The project name is changing from XMLObject to EaseXML3**. But
   XMLObject class name will remain. So you will only need to modify
   the package import statement in your code. Old news will keep trace
   of old name. The SVN repository will be renamed, i'm wondering
   wether i should do the same for the mailing list .. or not. Keep in
   touch :)
 
-- **11 Nov 2004**: 
+- **11 Nov 2004**:
   `Joshua Buysse`_ built a binary package of XMLObject for the CSW
   project CSW is a set of prebuilt packages for Solaris systems. He
   will be interested to get feedback about it. Many thanks to him !
@@ -58,8 +58,8 @@ Last news
   Tobias Brox who joined the team.
 
 - **25 Sep 2004**:
-  Removed the commit monitoring list since the `EaseXML RSS Feed`_
-  appeared. The `xmlobject-discuss archives`_ are now available. 
+  Removed the commit monitoring list since the `EaseXML3 RSS Feed`_
+  appeared. The `xmlobject-discuss archives`_ are now available.
 
 .. _`Joshua Buysse`: http://www.blastwave.org/packages.php/py_xmlobject
 .. _`xmlobject-discuss archives`: http://lists.base-art.net/archives/xmlobject-discuss
@@ -85,7 +85,7 @@ Tgz directory
 SVN
 ---
 
-EaseXML source code is now hosted on a Subversion repository on
+EaseXML3 source code is now hosted on a Subversion repository on
 http://svn.base-art.net. To access it you have 3 alternatives:
 
 - browser-friendly nice output and diff capabilities with ViewCVS
@@ -99,7 +99,7 @@ http://svn.base-art.net. To access it you have 3 alternatives:
   * ... `svn commit`
 
 - Aggregator-friendly RSS feed at:
- 
+
   * http://svn.base-art.net/easexml.xml
 
 If you want commit rights to the repository, let me know.
@@ -108,7 +108,7 @@ The repository is organized this way (the 'classic' one):
 - `trunk` : Bleeding edge
 - `tags` : Mainly release marks, making a moment in the repository
   history available
-- `branches` : Placeholder where to put long-time parallel EaseXML
+- `branches` : Placeholder where to put long-time parallel EaseXML3
   branches
 
 Well I'm not absolutely sure of the meaning of life of the schema. So

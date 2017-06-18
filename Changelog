@@ -1,4 +1,12 @@
-- Version 0.2.0 -- 12/12/2004
+- Version 0.3.0 -- 2017-06-18
+
+  * Project's name changed from EaseXML to EaseXML3
+  * Revive on GibHub for Python 3
+  * Rename README to README.rst as it contains ReStructured Text
+  * target Python 2, Python 2.7, Python 3, Python 3.6
+  * Change dates in Changelog from DD-MM-YYYY to YYYY-MM-DD
+
+- Version 0.2.0 -- 2004-12-12
 
   * Project's name changed from XMLObject to EaseXML !
   * Better support for XMLObjects comparison, inheritance and introspection
@@ -9,7 +17,7 @@
     XMLObject or not
   * Unicode typed strings output can now be disabled (_unicodeOutput boolean
     class attribute defaults to True)
-  * Nodes output can now be ordered by node names (_nodesOrder and _attrsOrder 
+  * Nodes output can now be ordered by node names (_nodesOrder and _attrsOrder
     lists as class attributes)
   * Pretty XML printing can be disabled (usefull when dealing with
     large data) by setting the class attribute _prettyPrint to False
@@ -22,7 +30,7 @@
     support in Nodes, XML comments pretty printing, ..)
   * Documentation re-write
 
-- Version 0.1.3 -- 06/10/2004
+- Version 0.1.3 -- 2004-10-06
 
   * Unicode support
   * Corrected few regex related bugs in the PrettyXMLPrinter
@@ -32,12 +40,12 @@
   * Documentation update and API generated using epydoc
   * Now releases are available directly in SVN (tags/ directory).
 
-- Version 0.1.2 -- 23/08/2004
+- Version 0.1.2 -- 2004-08-23
 
   * Corrected a bug in TypedList and MixedList preventing from adding
     one item in itself.
 
-- Version 0.1.1 -- 05/08/2004
+- Version 0.1.1 -- 2004-08-05
 
   * Added a little wrap around dom.getElementsByTagName() to search
     nodes in direct children instead of all the XML document (Thanks to
@@ -47,12 +55,12 @@
     Prescott for reporting the problem)
   * New type Node added : CommentNode
 
-- Version 0.1.0 -- 31/07/2004
+- Version 0.1.0 -- 2004-07-31
 
   * Special class attribute `_name` to override default object name
     when translating to XML.
   * Method definition support (Thanks to Anders Pearson for patch).
-  * entities support through special class attribute `entities` (see 
+  * entities support through special class attribute `entities` (see
     the doc for more details).
   * `facultative` Node keyword renamed to `optional` (Thanks to Jesir
     Vargas for advice).
@@ -63,19 +71,19 @@
   * New Attributes : CDATAttribute, NMTokenAttribute,
     NMTokensAttribute (like in DTDs)
   * Few more unit-tests (working this time :-) )
-  
-- Version 0.0.3 -- 16/06/2004
+
+- Version 0.0.3 -- 2004-06-16
 
   * `fromXml` is now a class method
   * Added list assignements (XMLObject.ListNode = [ ... ])
   * `TextNode` mis-behavior fixed (Thanks to Joshua H. Rothenberg for bug report)
 
-- Version 0.0.2 -- 03/06/2004
-  
+- Version 0.0.2 -- 2004-06-03
+
   * Comparing (__cmp__) XMLObjects
   * Introspection (contributed by Simon Dumbleton)
   * Starting `real` unit-tests (PyUnit powered)
 
-- Version 0.0.1 -- 24/05/2004
+- Version 0.0.1 -- 2004-05-24
 
   * Initial Release

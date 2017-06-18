@@ -1,15 +1,16 @@
+# -*- coding: utf-8 -*-
+# Copyright © 2017 Doug Henderson <djndnbvg@gmail.com>
 # Copyright (C) 2004 Philippe Normand <phil@respyre.org>
 #
-# This file is part of EaseXML (http://easexml.base-art.net)
+# This file is part of EaseXML3 (http://easexml.base-art.net)
 #
 # Under PSF License (see COPYING)
-# $HeadURL: https://svn.base-art.net/full/easexml/trunk/EaseXML/main.py $
-# $Id: main.py 88 2004-12-02 08:09:53Z phil $
+
 
 import sys, re, types, string, copy
 
 if sys.version_info[:2] < (2,2):
-    raise RuntimeError('EaseXML is not compatible with Python versions prior to 2.2')
+    raise RuntimeError('EaseXML3 is not compatible with Python versions prior to 2.2')
 
 # xml.minidom is only used to parse incoming XML
 # when building XMLObject from string data
@@ -221,7 +222,7 @@ class MetaXMLObject(type):
     instanceFromXml = classmethod( instanceFromXml )
 
 
-        
+
 class XMLObject(object):
     """
         Class attributes of interest:
@@ -299,7 +300,7 @@ class XMLObject(object):
             instance.resetValue()
             if instance.getValue() is not None:
                 setattr(self, attrName, instance.getValue())
-                
+
         # if we have only one Node, it can directly be initialized
         # by unnamed constructor argument (in `args` tuple)
         if len(args) == 1 and len(self.getChildren()) == 2:
@@ -316,7 +317,7 @@ class XMLObject(object):
         # i have a dummy parent, overriden when i'm encapsulated in a
         # ChoiceNode or ListNode
         self.setParentNode(Node())
-        
+
         # execute user-defined initialization code
         self._init()
 
@@ -478,7 +479,7 @@ class XMLObject(object):
                 kw['depth'] -= 1
             else:
                 callableFunc(node, xmlObject=self, *args, **kw)
-    
+
     def getEntities(self):
         """ Get all entities specified in the xmlobject:
 
@@ -663,7 +664,7 @@ class XMLObject(object):
     #####################################################################
     ### Python dictionnary input/output
     #####################################################################
-                
+
     def toDict(self):
         """ Fetch an XMLObject instance's data in a hash mapped by Node name
 

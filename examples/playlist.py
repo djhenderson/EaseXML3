@@ -1,13 +1,15 @@
+# -*- coding: utf-8 -*-
+# Copyright © 2017 Doug Henderson <djndnbvg@gmail.com>
 # Copyright (C) 2004 Philippe Normand <phil@respyre.org>
 #
-# This file is part of EaseXML (http://easexml.base-art.net)
+# This file is part of EaseXML3 (http://easexml.base-art.net)
 #
 # Under PSF License (see COPYING)
 
 import sys
 sys.path.append('..')
 
-from EaseXML import *
+from EaseXML3 import *
 
 ## Snippet "playlist-decl"
 class Song(XMLObject):
@@ -19,7 +21,7 @@ class Song(XMLObject):
     artist = StringAttribute(optional=True)
     title = TextNode(default='Track Name')
     comment = CommentNode(default='Blah blah')
-    
+
 class Playlist(XMLObject):
     _entities = [ ('&xml;','eXtensible Markup Language')]
     name = StringAttribute()

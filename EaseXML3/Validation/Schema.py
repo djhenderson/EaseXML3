@@ -1,13 +1,13 @@
+# -*- coding: utf-8 -*-
+# Copyright © 2017 Doug Henderson <djndnbvg@gmail.com>
 # Copyright (C) 2004 Philippe Normand <phil@respyre.org>
 #
-# This file is part of EaseXML (http://easexml.base-art.net)
+# This file is part of EaseXML3 (http://easexml.base-art.net)
 #
 # Under PSF License (see COPYING)
-# $HeadURL: https://svn.base-art.net/full/easexml/trunk/EaseXML/Validation/Schema.py $
-# $Id: Schema.py 87 2004-12-01 08:21:08Z phil $
 
 
-from EaseXML import *
+from EaseXML3 import *
 
 __all__ = [ 'Schema', 'AttributeGroup', 'Attribute', 'Element', 'ComplexType',
             'SimpleType', 'Group', 'Sequence', 'Choice', 'Enumeration' ]

@@ -3,9 +3,11 @@
   Added a commit monitoring mailing list. It is intended to developers who
   want to keep in touch with developpement. Though the traffic on this list is
   not very high these days :) See Contact_ for further informations.
+
 - **04 Sep 2004**:
   Thanks to Jkx_ for setting up a mailing list manager :) A mailing list for
   XMLObject is now available. See Contact_ for more informations.
+
 - **23 Aug 2004**:
   Another maintenance release, fixing one very annoying recursive
   related bug reported by Ray, TD Travis and Fuzzy at Voidspace. I'm now
@@ -16,7 +18,7 @@
   A maintenance release, fixing few bugs and adding a CommentNode
   type. As usual see the Changelog_ :-)
 
-- **31 Jul 2004**: 
+- **31 Jul 2004**:
   After few months of apparent sleep, the nice
   Tagged-Python wakes up to release XMLObject 0.1.0. Many features
   added since last release. XMLObject should now be more reliable and
@@ -26,9 +28,9 @@
 - **04 Jul 2004**:
   Thanks to Christian_ for the brand new XMLObject logo. Dude you did good
   job man ! Other versions of the logo:
-  
+
   * Big_ one
-  * Small_ one 
+  * Small_ one
 
 - **16 Jun 2004**:
   Mainly a maintenance release, fixing a bug in TextNode, noticed by Joshua
@@ -44,14 +46,14 @@
   0.0.2 is out. See Changelog_ for more details. Finally got registering to
   Pypi :-)
 
-- **27 May 2004**: 
+- **27 May 2004**:
   After a little discussion on Ian's blog_, I recognize it is a mistake to
   place XMLObject under GPL. The next release will be under a more
   appropriate licence.
 
 - **23 May 2004**:
   This is the first XMLObject release. Read the documentation_ to have an
-  overview of what XMLObject can do right now. 
+  overview of what XMLObject can do right now.
 
 
 .. _documentation: doc.html

@@ -1,5 +1,5 @@
 ------------------------
-EaseXML Documentation
+EaseXML3 Documentation
 ------------------------
 
 .. contents:: Menu
@@ -7,43 +7,43 @@ EaseXML Documentation
 .. hint::
 
   If you're reading this file as pure ReST text, use the `buildDoc` script
-  provided with the source distribution of EaseXML or read the HTML
+  provided with the source distribution of EaseXML3 or read the HTML
   version located at www/doc.html in the source distribution.
 
 
-Why using EaseXML ?
+Why using EaseXML3 ?
 -------------------
 
 Are you bored fighting with SAX and DOM to deal with your XML data ?
-EaseXML combines the best Object Oriented features of Python with XML
+EaseXML3 combines the best Object Oriented features of Python with XML
 management. Declare some classes inheriting from the `XMLObject` type,
 you don't have to know the internals, you deal with Objects, you get
 XML. That's all.
 
-EaseXML is released under the `Python Licence`_, much known as PSF
-(standing for Python Standard Foundation Licence). Since EaseXML
+EaseXML3 is released under the `Python Licence`_, much known as PSF
+(standing for Python Standard Foundation Licence). Since EaseXML3
 widely uses new-style classes it requires at least Python 2.2.
 
 .. _Python Licence: http://www.python.org/psf/
 
-If you're looking for some kind of persistance system in EaseXML, you
+If you're looking for some kind of persistance system in EaseXML3, you
 may be desapointed. XMLObjects are basically designed to handle and
 store data. More *complex* concepts like circular references - which
-seem to be vital for persistance management - lack in EaseXML. There
+seem to be vital for persistance management - lack in EaseXML3. There
 are **real** Python persistance frameworks like XMLPickle and systems
 built around YAML.
 
-EaseXML is at an early stage development. So it currently doesn't
+EaseXML3 is at an early stage development. So it currently doesn't
 provide support for all XML the features described in the W3C papers. The
 effort is made on simplifying XML management. Current planned features
-are: 
+are:
 
 - xmlns support
 - Validation (Schema, DTD, Relax NG?)
 - Transitions from/to {Schema,DTD}
 
-EaseXML is not the only XML Python wrapper around. Next section
-deals with the most significant differences between EaseXML and the
+EaseXML3 is not the only XML Python wrapper around. Next section
+deals with the most significant differences between EaseXML3 and the
 others object-xml mappers.
 
 Compared to others
@@ -65,9 +65,9 @@ doesn't depends on many things other than Python itself.
 generateDS.py_ is a little different from the three above. You need to
 supply an XSchema describing the data format you want to handle with
 generateDS. Then, generateDS generates Python classes acting as
-bindings to the XML data. Thus classes customization is rather limited. 
+bindings to the XML data. Thus classes customization is rather limited.
 
-EaseXML takes yet another approach. Though validation support and
+EaseXML3 takes yet another approach. Though validation support and
 arbitrary data loading are planned features, i currently prefer
 definining custom classes describing the data format i want to deal
 with. It's the simplest way, in my opinion and i admit i'm too lazy to
@@ -79,7 +79,7 @@ write Schemas or DTDs ;-)
 .. _gnosis.xml.objectify: http://gnosis.cx/download/
 
 
-Now let's go deeply in EaseXML !
+Now let's go deeply in EaseXML3 !
 
 Common behavior
 ---------------
@@ -89,7 +89,7 @@ describing an XML grammar or even some XML samples. He would then like
 to store data in XML format conforming to that "specifications". And
 finally, a program would feed and/or read valid XML data.
 
-Well, the final goal of EaseXML is to handle all of that. Though XML
+Well, the final goal of EaseXML3 is to handle all of that. Though XML
 grammar support is unfinished, the developper can still define some
 Python bindings (as new-style classes) describing some implicit XML
 grammars. Then, dealing with XML data is as simple as using usual
@@ -98,14 +98,14 @@ user. Each XMLObject class instance can be expressed as an XML
 fragment.
 
 The next sections cover a little, but significant example used to show
-how to use EaseXML when designing an XML-related class
-hierarchy. We'll try to read some RSS feeds using EaseXML.
+how to use EaseXML3 when designing an XML-related class
+hierarchy. We'll try to read some RSS feeds using EaseXML3.
 
 Classes declarations
 --------------------
 
-Declaring EaseXML classes can be compared to writing a DTD or a
-Schema. But it's far more readable. Though for now EaseXML is less
+Declaring EaseXML3 classes can be compared to writing a DTD or a
+Schema. But it's far more readable. Though for now EaseXML3 is less
 powerfull than DTD and Schema to handle all XML grammar
 possibilities. Here is how the first XMLObject-derived class looks
 like:
@@ -163,7 +163,7 @@ Node constructor. Common Node options are:
 * `noLimit`: **ChoiceNode Specific option** indicating if the Node
   can behave as a multi-typed ListNode (see later for a more
   complete explanation on that option). `False` by default
-      
+
 XMLObject options
 ~~~~~~~~~~~~~~~~~
 
@@ -176,13 +176,13 @@ XMLObject behavior:
 - `_entities` : a list storing tuple entities
   (e.g, `('&toBeReplaced;', u'this is very very long data')`)
 - `_encoding` : a string representing the XML encoding to use during
-  XML import/export. Its value defaults to 'utf-8'. The `_encoding` 
-  attribute is very important when dealing with accentuated data. 
+  XML import/export. Its value defaults to 'utf-8'. The `_encoding`
+  attribute is very important when dealing with accentuated data.
 - `_unicodeOutput`: boolean switch indicating wether the XMLObject
   should output Python Unicode typed strings or not (defaults to
   `True`). This option is important if you're willing to communicate
   XML data with an external non-Python entity.
-- `_stripStrings` : a boolean value indicating whether EaseXML
+- `_stripStrings` : a boolean value indicating whether EaseXML3
   should strip strings during i/o operations. True by default.
   The `_stripStrings` can be very usefull with XMLObjects dealing
   with large bunches of data. When this attribute is set to False,
@@ -191,8 +191,8 @@ XMLObject behavior:
 - `_prettyPrint` : a boolean indicating whether the XML output should
   be human-readable (tags indented, ..) or not.
 - Nodes ordering options (when order cares for XML parsers ?) By
-  default, EaseXML uses the alphabetical order, you can override this
-  behavior: 
+  default, EaseXML3 uses the alphabetical order, you can override this
+  behavior:
 
   * `_attrsOrder`: usefull if you want to order an XMLObject
     Attributes list, e.g, ``_attrsOrder = [ 'opt1', 'attr2']``
@@ -265,7 +265,7 @@ Import-Export
 Dealing with XML
 ~~~~~~~~~~~~~~~~
 
-Well the final goal of EaseXML is to output some XML data. To do so,
+Well the final goal of EaseXML3 is to output some XML data. To do so,
 use the `toXml` method. If you want to build an XMLObject given its
 XML representation, use either the `fromXml` class method or
 `XMLObject.instanceFromXml` class method.
@@ -275,7 +275,7 @@ XML representation, use either the `fromXml` class method or
 
 The main advantage of using `instanceFromXml` over `fromXml` is that
 you don't need to know the class corresponding to the XML you want to
-feed in. Though currently (0.2.0), **EaseXML cannot bind XML data it
+feed in. Though currently (0.2.0), **EaseXML3 cannot bind XML data it
 doesn't know**, e.g there must exist an XMLObject class in the
 namespace either `instanceFromXml` will fail and raise a `ParseError`
 exception.
@@ -290,20 +290,20 @@ wether the string should be Unicode or not. Here is some XML sample output :
 Keyword paramaters can be passed to `toXml` method:
 
 - `headers`: boolean switch to tell if you want the <? ?> processing
-  instruction(s) placed on XML data head. 
+  instruction(s) placed on XML data head.
 - `tabLength`: integer indicating the tabulation length (2 by default)
 - `prettyPrint` : boolean value (True by default) overriding
   `_prettyPrint` class attribute.
 
 That's it for XML import/export API, it remains as simple as
 possible. Maybe a more Pythonic behavior : use `str(myXMLObjInstance)`
-to get the same result as `myXMLObjInstance.toXml(headers=0)`. 
+to get the same result as `myXMLObjInstance.toXml(headers=0)`.
 
 Python Dictionnaries
 ~~~~~~~~~~~~~~~~~~~~
 
 Many Python-XML data binders provide dictionary-like access to the XML
-bindings (`foo[attr]`). EaseXML can export data it handles as
+bindings (`foo[attr]`). EaseXML3 can export data it handles as
 dictionaries, though `__getitem__` and `__setitem__` behaviors are not
 directly supported.
 
@@ -314,7 +314,7 @@ About ChoiceNode
 ----------------
 
 ChoiceNode is a little more complicated that other Node types and thus
-requires a dedicated paragraph. 
+requires a dedicated paragraph.
 
 Mixed content
 ~~~~~~~~~~~~~
@@ -367,37 +367,37 @@ to use it correctly :-)
 Limitations
 -----------
 
-As mentionned in the beginning of this document, EaseXML lacks few
-nice features, mainly validation support. Second point, EaseXML can't
+As mentionned in the beginning of this document, EaseXML3 lacks few
+nice features, mainly validation support. Second point, EaseXML3 can't
 bind arbitrary XML data, e.g the developer has to define XMLObjects
 according to the XML data structures he wants to handle.
 
-Another interesting point is scalability. EaseXML has not really been
+Another interesting point is scalability. EaseXML3 has not really been
 tested with wide data sets. Internally it uses `xml.minidom` to parse
 incoming (`fromXml`) data. This parser (and more generally DOM) store
 entire data trees on dynamic memory, thus potentially eat **lots** of
 memory. Other parsers like *PyRXP* or *expat* may be more suitable in
 these cases and i'm considering bringing support for them in next
-EaseXML versions, though help/patches are always very welcome :-)
+EaseXML3 versions, though help/patches are always very welcome :-)
 
 
 Exported Symbols
 ----------------
 
-Simply doing `from EaseXML import *` won't pollute much your
+Simply doing `from EaseXML3 import *` won't pollute much your
 namespace. Though here are exported symbols detailled per module:
 
-From EaseXML.main:
+From EaseXML3.main:
 
 * `XMLObject`
 * `ParseError`
 
-From EaseXML.Node:
+From EaseXML3.Node:
 
 * `Node`
 * `RequiredNodeError`
 
-From EaseXML.Nodes:
+From EaseXML3.Nodes:
 
 * `ItemNode`
 * `ListNode`
@@ -408,7 +408,7 @@ From EaseXML.Nodes:
 * `ProcessingInstructionNode`
 * `LeftRecursionError` (raised by `ChoiceNode`)
 
-From EaseXML.Attributes:
+From EaseXML3.Attributes:
 
 * `CDATAttribute`
 * `NMTokenAttribute`
@@ -416,7 +416,7 @@ From EaseXML.Attributes:
 * `StringAttribute`
 * `IntegerAttribute`
 
-For a more complete reference about EaseXML internals and API, the
+For a more complete reference about EaseXML3 internals and API, the
 interested developer shall consult the `online API documentation`_.
 
 .. _online API documentation: http://easexml.base-art.net/API/
@@ -431,11 +431,11 @@ I'd like to thank Ian Bicking for :
 - the `examplesstripper.py` script helping to produce code snippets in
   XHTML, very useful when writting this documentation sheet.
 - SQLObject globally which is a good source of inspiration for
-  EaseXML.
+  EaseXML3.
 
-ExoWeb_ people are active users, debuggers of EaseXML and i thank them
+ExoWeb_ people are active users, debuggers of EaseXML3 and i thank them
 for the many enhancements and feedback they provide to this software
-in general. 
+in general.
 
 .. _ExoWeb: http://exoweb.net
 

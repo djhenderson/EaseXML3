@@ -1,13 +1,13 @@
+# -*- coding: utf-8 -*-
+# Copyright © 2017 Doug Henderson <djndnbvg@gmail.com>
 # Copyright (C) 2004 Philippe Normand <phil@respyre.org>
 #
-# This file is part of EaseXML (http://easexml.base-art.net)
+# This file is part of EaseXML3 (http://easexml.base-art.net)
 #
 # Under PSF License (see COPYING)
-# $HeadURL$
-# $Id$
 
 """
-    EaseXML's unit-tests
+    EaseXML3's unit-tests
 
 """
 
@@ -18,7 +18,7 @@ import sys
 sys.path.insert(0,'..')
 sys.path.insert(1,'.')
 
-from EaseXML import *
+from EaseXML3 import *
 import unittest
 
 ## For compatibility with older python versions, not having
@@ -39,7 +39,7 @@ class Item(XMLObject):
     nmToks = NMTokensAttribute(optional=True)
     dummyData = RawNode()
     comment = CommentNode()
-    
+
     def aMethod(self):
         return 'ok'
 
@@ -97,7 +97,7 @@ class TestEncoding(unittest.TestCase):
 
     class UnicodeUTF8(Default):
         _unicodeOutput = True
-        
+
     def runPlainTest(self,input,xmlclass,
                      expected_encoding,expected_py_output=None):
         """
@@ -108,7 +108,7 @@ class TestEncoding(unittest.TestCase):
         when restoring the XMLObject, we get back expected_py_output
         (defaults to input).
         """
-        
+
         if not expected_py_output:
             expected_py_output=input
 
@@ -128,8 +128,8 @@ class TestEncoding(unittest.TestCase):
         obj2=xmlclass.fromXml(xml)
         self.assertEquals(obj2, obj)
         self.assertEquals(type(obj2.testNode),type(expected_py_output))
-        self.assertEquals(obj2.testNode, expected_py_output)        
-        
+        self.assertEquals(obj2.testNode, expected_py_output)
+
     def testDefaultUTF8In(self):
         """
         We make a default object, and feed it with Norwegian
@@ -197,7 +197,7 @@ class GetSetTest(unittest.TestCase):
         self.assertEqual(self.obj.record, 'AB1')
         self.assertEqual(self.obj.dummyData, 'This is Dummy')
         self.assertEqual(self.obj.comment,'this should be a comment')
-        
+
     def testSet(self):
         self.obj.position = 4
         self.assertEqual(self.obj.position, 4)
@@ -218,13 +218,13 @@ lines of : text"""
         self.assertEqual(self.obj.cdataAttr,'ok1')
         self.assertEqual(self.obj.nmToks,s1)
 
-                         
+
 class Playlist(XMLObject):
     name = StringAttribute()
     type = StringAttribute()
     items = ListNode('Item')
     comment = CommentNode()
-    
+
 class GetSetTest2(unittest.TestCase):
 
     klass = Playlist
@@ -239,7 +239,7 @@ class GetSetTest2(unittest.TestCase):
         self.obj = self.klass(**self.data)
         for i in self.defaultPositions:
             self.obj.items.append(Item(position=i, content=str(i)*5))
-        
+
     def testGetList(self):
         self.assertEqual(len(self.obj.items), self.itemsNb)
         for i in self.defaultPositions:
@@ -258,13 +258,13 @@ class ForEachTest(GetSetTest2):
     def findPositions(self, node, xmlObject, **kw):
         if node.getName() == 'position':
             self.positions.append(getattr(xmlObject,node.getName()))
-        
+
     def testForEach(self):
         self.positions = []
         self.obj.forEach(self.findPositions)
         self.assertEqual(len(self.positions), len(self.obj.items))
         self.assertEqual(self.positions, self.defaultPositions)
-        
+
 class NewNameTest(unittest.TestCase):
 
     def testCorrectNaming(self):
@@ -286,7 +286,7 @@ class NewNameTest(unittest.TestCase):
 
         self.assertRaises(ValueError, IntTest().toXml)
         self.assertRaises(ValueError, IntTest().toXml)
-        
+
 class ImportExport:
     """ Partial Mixin for import/export tests.
 
@@ -295,15 +295,15 @@ class ImportExport:
         operations.
 
     """
-    
+
     def testImport(self):
         obj2 = getattr(self.klass,self.importFunc)(self.xmlData)
         self.assertEqual(obj2, self.obj)
-        
+
     def testExport(self):
         xml = getattr(self.obj,self.exportFunc)()
         self.assertEqual(xml, self.xmlData)
-        
+
     def testExportImport(self):
         xml = getattr(self.obj,self.exportFunc)()
         obj2 = getattr(self.klass,self.importFunc)(xml)
@@ -321,7 +321,7 @@ class XMLImportExportTest(GetSetTest, ImportExport):
   </content>
   <![CDATA[This is Dummy]]>
 </Item>"""
-    
+
 
 class DictImportExportTest(GetSetTest,ImportExport):
     importFunc = 'fromDict'
@@ -341,7 +341,7 @@ class DeepDictImportExportTest(GetSetTest2, ImportExport):
                           'nmTok': None, 'cdataAttr': None}
                          for i in GetSetTest2.defaultPositions ],
                'type': 'xml', 'name': 'foo'}
-    
+
 class InheritanceTest(unittest.TestCase):
 
     def checkDataForInstance(self, instance, data):
@@ -362,7 +362,7 @@ class InheritanceTest(unittest.TestCase):
 
         self.checkDataForInstance(pl, data)
         self.assertEqual(pl.items, [])
-        
+
         pl2 = MyPlaylist.fromXml(pl.toXml())
         self.assertEqual(pl2.toXml(), pl.toXml())
 
@@ -374,8 +374,8 @@ class InheritanceTest(unittest.TestCase):
 
         pl3 = QPlaylist.fromXml(qpl.toXml())
         self.assertEqual(pl3.toXml(), qpl.toXml())
-        
-    def testMultipleInherit(self): 
+
+    def testMultipleInherit(self):
         """
         Do some testing that "simple" multiple inheritation works as
         it should.  Currently (revision 77) XMLObject warns that there
@@ -385,7 +385,7 @@ class InheritanceTest(unittest.TestCase):
         """
         import logging
         logging.getLogger().setLevel(logging.ERROR)
-        
+
         class Dummy:
             _name = 'foo bar'
 
@@ -404,19 +404,19 @@ class InheritanceTest(unittest.TestCase):
 
         class ABList(XMLObject):
             objs = ListNode('A1')
-        
+
         abList = ABList()
         abList.objs.append(A1()) # OK
         abList.objs.append(B1()) # Semantically Ok, but ...
         self.assertEqual(abList.objs[-1], B1())
-        
+
 
 class Item2(XMLObject):
     _name = "item2"
 
 class DummyItem(XMLObject):
     bl = ItemNode('Blah')
-    
+
 class Blah(XMLObject):
     mix = ChoiceNode(['Item2','Blah'])
 
@@ -431,12 +431,12 @@ class TestChoice(unittest.TestCase):
         it2 = DummyItem()
         self.assertRaises(LeftRecursionError, setattr, b, 'mix', it)
         self.assertRaises(LeftRecursionError, setattr, b, 'mix', it2)
-        
+
     def testLeftRecurse2(self):
         b = Blah()
         b.mix = Item2(txt='glap')
         self.assertEqual(b.mix, Item2(txt='glap'))
-                         
+
         class Blah2(XMLObject):
             mix = ChoiceNode(['Blah2', 'Item2'])
 
@@ -483,7 +483,7 @@ class XXX(XMLObject):
     _name = 'xxx'
     aaa = ListNode('AAA',optional=False)
     bbb = ListNode('BBB',optional=False)
-    
+
 class AAA(XMLObject):
     _name = 'a_a'
     content = ChoiceNode(['BBB','CCC'],main=True)
@@ -583,7 +583,7 @@ class B(XMLObject):
     a_list = ListNode("A")
 
 class TobiasTest(unittest.TestCase):
-    def testNameClash(self):               
+    def testNameClash(self):
         b = B(name = "BLAH")
         b.a_list.append(A(name="1"))
         b.a_list.append(A(name="2"))
@@ -594,7 +594,7 @@ class TobiasTest(unittest.TestCase):
         self.assertEqual(b1.name , "BLAH")
         self.assertEqual(len(b1.a_list) ,2)
 
-    def testNoneAttr(self):               
+    def testNoneAttr(self):
         a1 = A(name = "foo")
         self.assertEqual(a1.opt_param, None)
         a2 = A().fromXml(a1.toXml())
@@ -606,7 +606,7 @@ class TwoDeep(XMLObject):
 
 class OneDeep(XMLObject):
     children = ListNode('TwoDeep')
-    
+
 class Root(XMLObject):
     children = ListNode('OneDeep')
 
@@ -627,7 +627,7 @@ class DeepTest(unittest.TestCase):
         self.assertEqual(str(root), self.expected)
         self.assertEqual(str(Root.fromXml(str(root))),
                          self.expected)
-            
+
     def testOneBeforeTwo(self):
         root = Root()
         one = OneDeep()
@@ -650,7 +650,7 @@ class DeepTest(unittest.TestCase):
 class C(XMLObject):
     name = TextNode(optional=True)
     attr = StringAttribute()
-    
+
 class ExoWebTests(unittest.TestCase):
     def testTextNode(self):
         """
@@ -689,7 +689,7 @@ class ExoWebTests(unittest.TestCase):
         class D(XMLObject):
             attr = StringAttribute(optional=True)
             intattr = IntegerAttribute(optional=True)
-            
+
         c3 = D()
         self.assertEqual(c3.attr,None)
         self.assertEqual(c3.intattr,None)
@@ -712,8 +712,8 @@ class ExoWebTests(unittest.TestCase):
         restored_xml_object = XMLObject.instanceFromXml(xml)
         self.assert_(isinstance(restored_xml_object, Sample2))
         self.assertEqual('jacob', restored_xml_object.name)
-            
-        
+
+
 
 class StripTest(unittest.TestCase):
 
@@ -724,7 +724,7 @@ class StripTest(unittest.TestCase):
 
         class Pretty(Unpretty):
             _prettyPrint = True
-            
+
         pretty=Pretty(node='test')
         unpretty=Unpretty(node='test')
 
@@ -734,7 +734,7 @@ class StripTest(unittest.TestCase):
 
         ## Unpretty XML should be without whitespace
         self.assert_(unpretty.toXml().count('>test<'))
-        
+
         ## pretty XML should be with whitespace
         self.assertEquals(pretty.toXml().count('>test<'),0)
 
@@ -746,7 +746,7 @@ class StripTest(unittest.TestCase):
         data = ' \t       Ouch !   ! !! !!!            \n   '
         st = StripTease(content=data)
         st2 = StripTease.fromXml(st.toXml())
-        
+
         self.assertEqual(st2, st)
         self.assertEqual(st2.content, st.content)
 

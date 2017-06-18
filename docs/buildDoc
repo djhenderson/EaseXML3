@@ -1,7 +1,9 @@
+#!/bin/bash
 
 pushd ../examples > /dev/null
 ./examplestripper.py
 popd > /dev/null
 
 rest2html -t README ../www/doc.html
+
 python makeAPIDoc.py

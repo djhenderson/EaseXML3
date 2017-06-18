@@ -1,4 +1,3 @@
-#! python
 # -*- coding: utf-8 -*-
 # Copyright © 2017 Doug Henderson <djndnbvg@gmail.com>
 # Copyright (C) 2004 Philippe Normand <phil@respyre.org>
@@ -7,13 +6,9 @@
 #
 # Under PSF License (see COPYING)
 
-import sys, os
-from epydoc import cli, objdoc
-
-os.chdir('..')
-sys.argv.extend(['-o','www/API','EaseXML3'])
-
-objdoc.set_default_docformat('restructuredtext')
-cli.cli()
-
-print 'Done'
+## TODO: add some old-XMLObject detection/warning mechanism
+from main import *
+from Nodes import *
+from Attributes import *
+from Node import RequiredNodeError
+from Namespace import Namespace

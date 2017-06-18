@@ -1,6 +1,15 @@
+# -*- coding: utf-8 -*-
+# Copyright © 2017 Doug Henderson <djndnbvg@gmail.com>
+# Copyright (C) 2004 Philippe Normand <phil@respyre.org>
+#
+# This file is part of EaseXML3 (http://easexml.base-art.net)
+#
+# Under PSF License (see COPYING)
+
 import sys
 sys.path.insert(0,'..')
-from EaseXML import *
+
+from EaseXML3 import *
 
 class AnotherFoo(XMLObject):
     xslt = ProcessingInstructionNode('xml-stylesheet',

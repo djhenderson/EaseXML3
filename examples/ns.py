@@ -1,5 +1,15 @@
+# -*- coding: utf-8 -*-
+# Copyright © 2017 Doug Henderson <djndnbvg@gmail.com>
+# Copyright (C) 2004 Philippe Normand <phil@respyre.org>
+#
+# This file is part of EaseXML3 (http://easexml.base-art.net)
+#
+# Under PSF License (see COPYING)
 
-from EaseXML import *
+import sys
+sys.path.append('..')
+
+from EaseXML3 import *
 
 class HTML(Namespace):
     uri = 'http://www.w3.org/TR/REC-html40'
@@ -30,8 +40,8 @@ r = Reservation()
 
 r.name = Name(mainNode='Layman, A',HTML_klass='largeSansSerif')
 print r.name.HTML_klass
-#r.ns.name.klass[HTML] = 
-#r.name.klass[HTML] = 
+#r.ns.name.klass[HTML] =
+#r.name.klass[HTML] =
 
 r.seat = Seat(klass='Y', mainNode='33B')
 #r.seat.klass[HTML] = 'largeMonotype'

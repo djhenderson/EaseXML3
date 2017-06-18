@@ -1,6 +1,9 @@
 I thank these people for their contributions on XMLObject:
 
-- Simon Dumbleton <simondumbleton@hotmail.com> 
+- Philippe Normand <phil@respyre.org>
+  * EaseXML author and maintainer
+
+- Simon Dumbleton <simondumbleton@hotmail.com>
   * XMLObject's introspection patch
 
 - Anders Pearson <anders@columbia.edu>

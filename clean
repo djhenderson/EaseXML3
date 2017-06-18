@@ -1,9 +1,13 @@
+#!/bin/bash
+
 find . -name "*~" -exec rm {} \;
 find . -name "*.pyc" -exec rm {} \;
 find . -name "*.pye" -exec rm {} \;
 find . -name "*.pyo" -exec rm {} \;
 #find . -name "*.html" -exec rm {} \;
+
 rm -f www/{Changelog.html,index.html,oldNews.html}
 rm -fr examples/snippets/
 rm -fr dist build
+
 echo "Clean done. It did it once again baby"

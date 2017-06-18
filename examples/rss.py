@@ -1,16 +1,18 @@
 # -*- coding: iso8859-1 -*-
+# Copyright © 2017 Doug Henderson <djndnbvg@gmail.com>
 # Copyright (C) 2004 Philippe Normand <phil@respyre.org>
 #
-# This file is part of EaseXML (http://easexml.base-art.net)
+# This file is part of EaseXML3 (http://easexml.base-art.net)
 #
 # Under PSF License (see COPYING)
 
 ## allow rss.py to be executed directly from this directory,
-## without installing EaseXML.
-import sys
-sys.path.insert(0,"../")
+## without installing EaseXML3.
 
-from EaseXML import *
+import sys
+sys.path.insert(0,"..")
+
+from EaseXML3 import *
 import urllib2
 
 ## Snippet "RSS-decl"
@@ -55,7 +57,7 @@ class Item(XMLObject):
 ## End Snippet
 
 ## Snippet "RSS-feeding"
-channel = Channel(title='EaseXML-powered RSS feed')
+channel = Channel(title='EaseXML3-powered RSS feed')
 rss = Rss(channel=channel)
 rss.channel.items = [ Item(title='sample title 1',
                               description='blah',
@@ -109,7 +111,7 @@ rss (xslt)
 """
 ## End Snippet
 
-## Snippet "forEachCallback"    
+## Snippet "forEachCallback"
 def someCallable(node, xmlObject, *args, **kw):
     """
    - `node`: the current Node instance found by forEach
@@ -138,7 +140,7 @@ pprint.pprint(rss.toDict())
                         'title': 'sample title 2'}],
              'language': 'en',
              'link': 'http://some/url/rss.xml',
-             'title': 'EaseXML-powered RSS feed'},
+             'title': 'EaseXML3-powered RSS feed'},
  'version': '2.0',
  'xslt': [(u'type', u'text/css'), (u'href', u'http://foo.com/style.css')] }
 """
@@ -152,7 +154,7 @@ print rss.toXml()
 <rss version="2.0">
   <channel>
     <title>
-        EaseXML-powered RSS feed
+        EaseXML3-powered RSS feed
     </title>
     <link>
         http://some/url/rss.xml

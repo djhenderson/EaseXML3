@@ -1,4 +1,4 @@
-
+#!/bin/bash
 
 sed -i 's/#releases/\/download\//g' index.html
 sed -i 's/#old-news/\/oldNews.html/g' index.html

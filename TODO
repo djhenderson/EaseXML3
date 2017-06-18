@@ -1,7 +1,7 @@
 
 - sort of DTD and/or Schema support ?
 - namespace handling
-- Bridge between SQLObject and EaseXML
+- Bridge between SQLObject and EaseXML3
 
 Done
 ====

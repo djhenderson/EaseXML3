@@ -1,11 +1,11 @@
 # -*- coding: iso8859-1 -*-
+# Copyright © 2017 Doug Henderson <djndnbvg@gmail.com>
 # Copyright (C) 2004 Philippe Normand <phil@respyre.org>
 #
-# This file is part of EaseXML (http://easexml.base-art.net)
+# This file is part of EaseXML3 (http://easexml.base-art.net)
 #
 # Under PSF License (see COPYING)
-# $HeadURL: https://svn.base-art.net/full/easexml/trunk/EaseXML/PrettyXMLPrinter.py $
-# $Id: PrettyXMLPrinter.py 85 2004-11-24 17:09:41Z phil $
+
 
 import re
 

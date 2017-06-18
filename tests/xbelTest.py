@@ -1,13 +1,15 @@
+# -*- coding: utf-8 -*-
+# Copyright © 2017 Doug Henderson <djndnbvg@gmail.com>
 # Copyright (C) 2004 Philippe Normand <phil@respyre.org>
 #
-# This file is part of EaseXML (http://easexml.base-art.net)
+# This file is part of EaseXML3 (http://easexml.base-art.net)
 #
 # Under PSF License (see COPYING)
 
 import sys,os
 sys.path.append('..')
 
-from XMLObject import *
+from EaseXML3 import *
 
 class title(XMLObject):
     mainNode = TextNode()
@@ -19,7 +21,7 @@ class icon(XMLObject): pass
 
 class alias(XMLObject):
     ref = IntegerAttribute()
-    
+
 class bookmark(XMLObject):
     href = StringAttribute()
     added = IntegerAttribute(optional=True)
@@ -36,7 +38,7 @@ class folder(XMLObject):
     desc = ItemNode('desc', optional=True)
     icon = ItemNode('icon', optional=True)
     bookmarks = ListNode('bookmark')
-    
+
 class xbel(XMLObject):
     title = ItemNode('title')
     desc = ItemNode('desc',optional=True)

@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
+# Copyright © 2017 Doug Henderson <djndnbvg@gmail.com>
 # Copyright (C) 2004 Philippe Normand <phil@respyre.org>
 #
-# This file is part of EaseXML (http://easexml.base-art.net)
+# This file is part of EaseXML3 (http://easexml.base-art.net)
 #
 # Under PSF License (see COPYING)
-# $HeadURL: https://svn.base-art.net/full/easexml/trunk/EaseXML/TypedList.py $
-# $Id: TypedList.py 89 2004-12-08 11:38:54Z phil $
+
 
 import UserList, copy
 from main import XMLObject
@@ -77,7 +78,7 @@ class TypedList(UserList.UserList):
                                           self._xmlList.getRegistry(),
                                           self._compareTypes, it):
             #print 'humm'
-            
+
             #itClass = classregistry.registry(registry).getClass(it.getClassName())
             #import pdb; pdb.set_trace()
             typeMismatch = True
@@ -99,7 +100,7 @@ class TypedList(UserList.UserList):
         for it in other:
             other2.append(it)
         return other2
-    
+
     def append(self, item):
         item = self.checkItem(item)
         UserList.UserList.append(self, item)

@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+# Copyright © 2017 Doug Henderson <djndnbvg@gmail.com>
+# Copyright (C) 2004 Philippe Normand <phil@respyre.org>
+#
+# This file is part of EaseXML3 (http://easexml.base-art.net)
+#
+# Under PSF License (see COPYING)
+
+
 """
 classresolver.py
   2 February 2004, Ian Bicking <ianb@colorstudy.com>
