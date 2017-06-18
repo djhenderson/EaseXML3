@@ -6,6 +6,7 @@
 #
 # Under PSF License (see COPYING)
 
+from __future__ import print_function
 
 from main import *
 from Nodes import *
@@ -91,7 +92,7 @@ class Element2XO:
             if len(cp) == 2:
                 name, mod = cp
                 if name == "#PCDATA":
-                    print '<<<<<<', mod
+                    print('<<<<<<', mod)
                     continue
 
                 modMap = {'?' : ['optional=True','once=True'],
@@ -104,8 +105,8 @@ class Element2XO:
                 except KeyError:
                     pass
                 #else:
-                #    print '>>>>>>>>>>>>>>>>>>>>',entity, name
-                print self.name,wrapper,'<<<<', name, mod, 'ok'
+                #    print('>>>>>>>>>>>>>>>>>>>>',entity, name)
+                print(self.name,wrapper,'<<<<', name, mod, 'ok')
                 if wrapper == 'ItemNode':
                     name2 = ["'%s'" % titleWord(name) ]
                 else:
@@ -126,8 +127,8 @@ class Element2XO:
 
 def processDTD(aDTD, outFile=None):
 
-    print "# Loading DTD %s ... to %s" % (aDTD, outFile)
-    print
+    print("# Loading DTD %s ... to %s" % (aDTD, outFile))
+    print()
 
     dtd = xmldtd.load_dtd(aDTD)
 
@@ -143,7 +144,7 @@ def processDTD(aDTD, outFile=None):
         elements.append( Element2XO(dtd,c,elem) )
 
     if outFile == "stdout":
-        print c.end()
+        print(c.end())
     else:
         c.generate(outFile)
 

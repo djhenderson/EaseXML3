@@ -43,13 +43,13 @@ class CCC(XMLObject):
 
 ## Snippet "xxx-mainNode"
 cc = CCC('Some Text')
-print cc.toXml(headers=False)
+print(cc.toXml(headers=False))
 """
 <CCC>
     Some Text
 </CCC>
 """
-print cc.content
+print(cc.content)
 """
 Some Text
 """
@@ -58,7 +58,7 @@ Some Text
 ## Snippet "xxx-invalid"
 xx = XXX()
 try:
-    print xx.toXml()
+    print(xx.toXml())
 except TypeError:
     pass
 """
@@ -100,7 +100,7 @@ xxxStr = xxx.toXml()
 xxx2 = XXX.fromXml(xxxStr)
 assert xxx2 == xxx, "Pb during import/export"
 
-print xxxStr
+print(xxxStr)
 
 """
 ## Snippet "xxx-display"

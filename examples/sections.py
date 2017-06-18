@@ -6,6 +6,8 @@
 #
 # Under PSF License (see COPYING)
 
+from __future__ import print_function
+
 import sys
 sys.path.insert(0,'..')
 
@@ -29,7 +31,7 @@ section.title = 'Level 1'
 section.mix = Section(title='Level 2',
                       mix=Paragraph('Foo bar'))
 
-print section.toXml()
+print(section.toXml())
 """
 <?xml version="1.0" encoding="utf-8" ?>
 <Section>

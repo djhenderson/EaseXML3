@@ -13,10 +13,10 @@
 
 ## We want to be able to run this both from the test directory and the
 ## parent directory, beeing sure that we test the development version,
-## and not any old installed version of XMLObject.
+## and not any old installed version of EaseXML3.
 import sys
-sys.path.insert(0,'..')
-sys.path.insert(1,'.')
+sys.path.insert(0, '..')
+sys.path.insert(1, '.')
 
 from EaseXML3 import *
 import unittest
@@ -24,8 +24,16 @@ import unittest
 ## For compatibility with older python versions, not having
 ## False and True.
 ## (At least I assume so.  -- Tobias, 2004-10-07)
-False = 0!=0
-True  = 0==0
+try:
+    if True:
+        pass
+except ValueError:
+    True  = 0==0
+try:
+    if not False:
+        pass
+except ValueError:
+    False = 0!=0
 
 class Item(XMLObject):
     _entities = [ ('&xml;', 'eXtensible Markup Language')]

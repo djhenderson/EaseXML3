@@ -7,13 +7,15 @@
 #
 # Under PSF License (see COPYING)
 
+from __future__ import print_function
+
 import sys
 
 try:
     from distutils.core import setup
     from distutils.command.sdist import sdist
 except ImportError:
-    print "python-dev package is missing."
+    print("python-dev package is missing.")
     sys.exit()
 
 # patch distutils if it can't cope with the "classifiers" keyword

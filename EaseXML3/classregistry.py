@@ -21,10 +21,11 @@ created on demand.
 
 Use like::
 
+    >>> from __future__ import print_function
     >>> import classregistry
     >>> registry = classregistry.registry('MyModules')
     >>> def afterMyClassExists(cls):
-    ...    print 'Class finally exists:', cls
+    ...    print('Class finally exists:', cls)
     >>> registry.addClassCallback('MyClass', afterMyClassExists)
     >>> class MyClass:
     ...    pass

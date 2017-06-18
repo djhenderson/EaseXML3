@@ -6,6 +6,8 @@
 #
 # Under PSF License (see COPYING)
 
+from __future__ import print_function
+
 import sys
 sys.path.insert(0,'..')
 
@@ -19,7 +21,7 @@ class AnotherFoo(XMLObject):
     blah = TextNode(optional=True)
 
 af = AnotherFoo()
-print af.toXml()
+print(af.toXml())
 
 """
 <?xml version="1.0" encoding="utf-8" ?>

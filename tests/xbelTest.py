@@ -6,8 +6,9 @@
 #
 # Under PSF License (see COPYING)
 
-import sys,os
-sys.path.append('..')
+import sys, os
+sys.path.insert(0, '..')
+sys.path.insert(1, '.')
 
 from EaseXML3 import *
 

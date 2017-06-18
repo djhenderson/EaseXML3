@@ -7,6 +7,8 @@
 #
 # Under PSF License (see COPYING)
 
+from __future__ import print_function
+
 import sys, os
 from epydoc import cli, objdoc
 
@@ -16,4 +18,4 @@ sys.argv.extend(['-o','www/API','EaseXML3'])
 objdoc.set_default_docformat('restructuredtext')
 cli.cli()
 
-print 'Done'
+print('Done')

@@ -77,7 +77,7 @@ class TypedList(UserList.UserList):
                  not self.walkOnXMLObject(parentType,
                                           self._xmlList.getRegistry(),
                                           self._compareTypes, it):
-            #print 'humm'
+            #print('humm')
 
             #itClass = classregistry.registry(registry).getClass(it.getClassName())
             #import pdb; pdb.set_trace()

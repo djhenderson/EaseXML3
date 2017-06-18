@@ -6,6 +6,8 @@
 #
 # Under PSF License (see COPYING)
 
+from __future__ import print_function
+
 import sys
 sys.path.append('..')
 
@@ -39,7 +41,7 @@ class A(XMLObject):
 r = Reservation()
 
 r.name = Name(mainNode='Layman, A',HTML_klass='largeSansSerif')
-print r.name.HTML_klass
+print(r.name.HTML_klass)
 #r.ns.name.klass[HTML] =
 #r.name.klass[HTML] =
 
@@ -50,7 +52,7 @@ r.seat = Seat(klass='Y', mainNode='33B')
 #r.ns[HTML].append(A(href='/cgi-bin/ResStatus',mainNode="Check Status"))
 
 r.departure = '1997-05-24T07:55:00+1'
-print r
+print(r)
 
 """
 <RESERVATION xmlns:HTML="http://www.w3.org/TR/REC-html40">

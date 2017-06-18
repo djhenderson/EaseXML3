@@ -9,6 +9,8 @@
 ## allow rss.py to be executed directly from this directory,
 ## without installing EaseXML3.
 
+from __future__ import print_function
+
 import sys
 sys.path.insert(0,"..")
 
@@ -72,13 +74,13 @@ rss2 = Rss.loadFromURL('http://base-art.net/wk/index.rdf')
 
 ## Snippet "RSS-items"
 for item in rss.channel.items:
-    print 'title:', item.title
+    print('title:', item.title)
 
 """
 title: sample title 1
 title: sample title 2
 """
-print len(rss.channel.items)
+print(len(rss.channel.items))
 """
 2
 """
@@ -87,8 +89,8 @@ print len(rss.channel.items)
 ## Snippet "RSS-forEachItem"
 def printNodeName(node, xmlObject, *args, **kw):
     depth = kw['depth']
-    print '%s%s (%s)' % ('   ' * depth, xmlObject.getName(),
-                         node.getName())
+    print( '%s%s (%s)' % ('   ' * depth, xmlObject.getName(),
+                          node.getName()))
 
 rss.forEach(printNodeName)
 """
@@ -147,7 +149,7 @@ pprint.pprint(rss.toDict())
 ## End Snippet
 
 ## Snippet "RSS-XML-output"
-print rss.toXml()
+print(rss.toXml())
 """
 <?xml version="1.0" encoding="utf-8" ?>
 <?xml-stylesheet type="text/css" href="http://foo.com/style.css" ?>

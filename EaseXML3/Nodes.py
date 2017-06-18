@@ -6,6 +6,7 @@
 #
 # Under PSF License (see COPYING)
 
+from __future__ import print_function
 
 import string, copy
 
@@ -47,7 +48,7 @@ class CommentNode(Node):
           class CommentTator(XMLObject):
               myComment = CommentNode()
 
-          print CommentTator(myComment='Blah lbah').toXml(headers=0)
+          print(CommentTator(myComment='Blah lbah').toXml(headers=0))
 
           <CommentTator>
              <!-- Blah lbah -->
@@ -90,7 +91,7 @@ class TextNode(Node):
               text = TextNode()
 
           f = Foo(text = 'Kind of fun')
-          print f.toXml(headers=False)
+          print(f.toXml(headers=False))
 
         Example XML output:
 
@@ -146,7 +147,7 @@ class RawNode(Node):
               text = RawNode()
 
           f = Foo(text = 'Kind of fun')
-          print f.toXml(headers=False)
+          print(f.toXml(headers=False))
 
         Example XML output:
 
@@ -374,7 +375,7 @@ class ListNode(Node):
 
           bag = AppleBag()
           bag.apples.append(Apple(type='Blah',color='green'))
-          print bag.toXml(headers=0)
+          print(bag.toXml(headers=0))
 
           <AppleBag>
             <Apple type="Blah" color="green" />
@@ -399,7 +400,7 @@ class ListNode(Node):
             try:
                 result = TypedList(self).checkList(aList)
             except Exception,ex:
-                print ex
+                print(ex)
                 result = False
         return result
 

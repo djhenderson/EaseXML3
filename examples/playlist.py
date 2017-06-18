@@ -6,6 +6,8 @@
 #
 # Under PSF License (see COPYING)
 
+from __future__ import print_function
+
 import sys
 sys.path.append('..')
 
@@ -46,8 +48,8 @@ xmlPlaylist = pList.toXml()
 xmlPlaylist2 = XMLObject.instanceFromXml(pList.toXml())
 
 pList2 = Playlist.fromXml(xmlPlaylist)
-print pList2.toXml()
-print type(pList2.toXml())
+print(pList2.toXml())
+print(type(pList2.toXml()))
 ## <type 'str'>
 assert xmlPlaylist == pList2.toXml(), 'Pb during import/export'
 assert xmlPlaylist2.toXml() == pList2.toXml(), 'Pb during import/export'
