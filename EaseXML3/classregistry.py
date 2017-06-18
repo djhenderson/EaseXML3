@@ -64,7 +64,7 @@ class ClassRegistry(object):
         created.  If it's already been created, the callback will be
         called immediately.
         """
-        if self.classes.has_key(className):
+        if className in self.classes:
             callback(self.classes[className], *args, **kw)
         else:
             self.callbacks.setdefault(className, []).append((callback, args, kw))

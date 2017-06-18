@@ -208,7 +208,7 @@ class MetaXMLObject(type):
 
             try:
                 dom = parseString(data)
-            except Exception, ex:
+            except Exception as ex:
                 raise ParseError(ex, data)
             else:
                 root_node_name = dom.documentElement.localName
@@ -334,7 +334,7 @@ class XMLObject(object):
                 value = node.getValueFromDom(dom, attrName,
                                              registry=self._registry,
                                              stripStrings=self._stripStrings)
-            except Exception, e:
+            except Exception as e:
                 raise
             else:
                 setattr(self, attrName, value)
@@ -407,7 +407,7 @@ class XMLObject(object):
                 elif node.getName() == attrName:
                     attr = MetaAttribute(node, self._encoding)
                     return attr.__get__(self, self.__class__)
-        raise AttributeError, attrName
+        raise AttributeError(attrName)
 
     __getitem__ = __getattr__
 
@@ -652,7 +652,7 @@ class XMLObject(object):
             xmlData = xmlData.encode(xo._encoding)
         try:
             dom = parseString(xmlData)
-        except Exception,ex:
+        except Exception as ex:
             raise ParseError(ex, xmlData, encoding=xo._encoding)
         else:
             xo._fromDom(dom.documentElement)

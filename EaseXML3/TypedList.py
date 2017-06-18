@@ -86,9 +86,9 @@ class TypedList(UserList.UserList):
         if typeMismatch:
             #
             raise TypeError("""\
-%s type required for %s. Got %s instead""" % (`parentType`,
-                                              `self._xmlList.getName()`,
-                                              `type(it)`))
+%s type required for %s. Got %s instead""" % (repr(parentType),
+                                              repr(self._xmlList.getName()`,
+                                              repr(type(it))))
         if isinstance(it,XMLObject):
             if it.getClassName() == self._xmlList.getParentType():
                 it = copy.deepcopy(it)

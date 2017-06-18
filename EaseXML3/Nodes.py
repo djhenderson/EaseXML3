@@ -399,7 +399,7 @@ class ListNode(Node):
         if result:
             try:
                 result = TypedList(self).checkList(aList)
-            except Exception,ex:
+            except Exception as ex:
                 print(ex)
                 result = False
         return result

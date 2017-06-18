@@ -69,9 +69,9 @@ class MixedList(TypedList):
 
         if typeMismatch:
             raise TypeError("""\
-%s type required for %s. Got %s instead""" % (`alternatives`,
-                                              `self._xmlList.getName()`,
-                                              `type(it)`))
+%s type required for %s. Got %s instead""" % (repr(alternatives),
+                                              repr(self._xmlList.getName()),
+                                              repr(type(it))))
 
         if isinstance(it,XMLObject):
             if it.getClassName() == self._xmlList.getParentType():

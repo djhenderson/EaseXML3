@@ -16,7 +16,7 @@ from utils import customUnicode, titleWord
 from xml.parsers.xmlproc import xmldtd
 import sys, types
 
-raise Exception, 'Not ready at all'
+raise Exception('Not ready at all')
 
 def Attribute(dtdAttr):
     declmap = { "#REQUIRED" : "optional=False",
